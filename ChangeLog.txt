@@ -1,0 +1,4 @@
+Rich WebView Adobe Air Native Extension
+
+
+Jun 16, 2015	>> V1.0: 	beginning of the journey!

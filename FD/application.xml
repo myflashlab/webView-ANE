@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<application xmlns="http://ns.adobe.com/air/application/15.0">
+  <id>com.doitflash.exWebView</id>
+  <versionNumber>1.0</versionNumber>
+  <supportedProfiles>mobileDevice</supportedProfiles>
+  <filename>exWebView</filename>
+  <name>exWebView</name>
+  <android>
+    <manifestAdditions>
+		<![CDATA[<manifest android:installLocation="auto">
+		<uses-sdk android:minSdkVersion="10" android:targetSdkVersion="19" />
+		<uses-permission android:name="android.permission.WAKE_LOCK" />
+		<uses-permission android:name="android.permission.CAMERA" />
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+		<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+		<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+		<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+		
+		<!-- This is only required for Cloud or Visual Search applications -->
+		<uses-permission android:name="android.permission.INTERNET" />
+		
+		<!-- These permissions are only needed for debugging -->
+		<uses-permission android:name="android.permission.SET_DEBUG_APP" />
+		<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+		
+		<!-- Required OpenGLES 2.x -->
+		<uses-feature android:glEsVersion="0x00020000" android:required="true" />
+		
+		<!-- Camera is always required -->
+		<uses-feature android:name="android.hardware.camera.any" android:required="true" />
+		<uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+		
+		<!-- Only required for location based applications -->
+		<uses-feature android:name="android.hardware.location" android:required="false" />
+		
+		<!-- Only required by tracking types such as SLAM, GPSCompass etc.. -->
+		<uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
+		<uses-feature android:name="android.hardware.sensor.compass" android:required="false" />
+		<uses-feature android:name="android.hardware.sensor.gyroscope" android:required="false" />
+		
+		<application android:hardwareAccelerated="true" android:allowBackup="true">
+			<activity android:hardwareAccelerated="false">
+				<intent-filter>
+					<action android:name="android.intent.action.MAIN" />
+					<category android:name="android.intent.category.LAUNCHER" />
+				</intent-filter>
+				<intent-filter>
+					<action android:name="android.intent.action.VIEW" />
+					<category android:name="android.intent.category.BROWSABLE" />
+					<category android:name="android.intent.category.DEFAULT" />
+				</intent-filter>
+			</activity>
+			
+		</application>
+		
+</manifest>]]></manifestAdditions>
+  </android>
+  <iPhone>
+    <!--https://developer.apple.com/library/ios/documentation/general/reference/infoplistkeyreference/Articles/iPhoneOSKeys.html-->
+    <!--http://help.adobe.com/en_US/air/build/WSfffb011ac560372f7e64a7f12cd2dd1867-8000.html-->
+    <!-- A list of plist key/value pairs to be added to the application Info.plist -->
+    <InfoAdditions>
+		<![CDATA[<key>MinimumOSVersion</key>
+		<string>6.1</string>
+		
+		<key>UIStatusBarStyle</key>
+		<string>UIStatusBarStyleBlackOpaque</string>
+		
+		<key>UIRequiresPersistentWiFi</key>
+		<string>NO</string>
+		
+		<key>UIFileSharingEnabled</key>
+		<string>YES</string>
+		
+		<key>UIPrerenderedIcon</key>
+		<true />
+		
+		<key>UIDeviceFamily</key>
+		<array>
+			<!-- iPhone support -->
+			<string>1</string>
+			<!-- iPad support -->
+			<string>2</string>
+		</array>]]></InfoAdditions>
+		
+    <requestedDisplayResolution>high</requestedDisplayResolution>
+  </iPhone>
+  <initialWindow>
+    <title>exWebView</title>
+    <content>exWebView.swf</content>
+    <visible>true</visible>
+    <fullScreen>true</fullScreen>
+    <autoOrients>false</autoOrients>
+    <renderMode>direct</renderMode>
+    <systemChrome>standard</systemChrome>
+    <aspectRatio>portrait</aspectRatio>
+  </initialWindow>
+  <icon>
+    <image48x48>icons/icon_48.png</image48x48>
+    <image57x57>icons/icon_57.png</image57x57>
+    <image72x72>icons/icon_72.png</image72x72>
+    <image114x114>icons/icon_114.png</image114x114>
+    <image512x512>icons/icon_512.png</image512x512>
+  </icon>
+  <extensions>
+    <extensionID>com.doitflash.air.extensions.webView</extensionID>
+  </extensions>
+</application>
