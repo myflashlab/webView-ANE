@@ -1,0 +1,1 @@
+copy the extension here and make sure FlashBuilder is finding it

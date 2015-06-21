@@ -1,0 +1,1 @@
+This demo project is just a help for FlashBuilder users to easily know how to run AR in their FB IDE but we will keep the FlashDevelop projects updated with new sample projects.

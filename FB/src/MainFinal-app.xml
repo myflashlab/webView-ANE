@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<application xmlns="http://ns.adobe.com/air/application/15.0">
+  <id>com.doitflash.exWebView</id>
+  <versionNumber>1.0</versionNumber>
+  <supportedProfiles>mobileDevice</supportedProfiles>
+  <filename>exWebView</filename>
+  <name>exWebView</name>
+  <android>
+    <manifestAdditions>
+		<![CDATA[<manifest android:installLocation="auto">
+		<uses-sdk android:minSdkVersion="10" android:targetSdkVersion="19" />
+		<uses-permission android:name="android.permission.WAKE_LOCK" />
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+		<uses-permission android:name="android.permission.INTERNET" />
+		
+		<application android:hardwareAccelerated="true" android:allowBackup="true">
+			<activity android:hardwareAccelerated="false">
+				<intent-filter>
+					<action android:name="android.intent.action.MAIN" />
+					<category android:name="android.intent.category.LAUNCHER" />
+				</intent-filter>
+				<intent-filter>
+					<action android:name="android.intent.action.VIEW" />
+					<category android:name="android.intent.category.BROWSABLE" />
+					<category android:name="android.intent.category.DEFAULT" />
+				</intent-filter>
+			</activity>
+			
+		</application>
+		
+</manifest>]]></manifestAdditions>
+  </android>
+  <iPhone>
+    <!--https://developer.apple.com/library/ios/documentation/general/reference/infoplistkeyreference/Articles/iPhoneOSKeys.html-->
+    <!--http://help.adobe.com/en_US/air/build/WSfffb011ac560372f7e64a7f12cd2dd1867-8000.html-->
+    <!-- A list of plist key/value pairs to be added to the application Info.plist -->
+    <InfoAdditions>
+		<![CDATA[<key>MinimumOSVersion</key>
+		<string>6.1</string>
+		
+		<key>UIStatusBarStyle</key>
+		<string>UIStatusBarStyleBlackOpaque</string>
+		
+		<key>UIRequiresPersistentWiFi</key>
+		<string>NO</string>
+		
+		<key>UIPrerenderedIcon</key>
+		<true />
+		
+		<key>UIDeviceFamily</key>
+		<array>
+			<!-- iPhone support -->
+			<string>1</string>
+			<!-- iPad support -->
+			<string>2</string>
+		</array>]]></InfoAdditions>
+		
+    <requestedDisplayResolution>high</requestedDisplayResolution>
+  </iPhone>
+  <initialWindow>
+    <title>exWebView</title>
+    <content>MainFinal.swf</content>
+    <visible>true</visible>
+    <fullScreen>true</fullScreen>
+    <autoOrients>false</autoOrients>
+    <renderMode>direct</renderMode>
+    <systemChrome>standard</systemChrome>
+    <aspectRatio>portrait</aspectRatio>
+  </initialWindow>
+  <extensions>
+    <extensionID>com.doitflash.air.extensions.webView</extensionID>
+  </extensions>
+</application>
