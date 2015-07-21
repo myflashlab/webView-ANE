@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/15.0">
   <id>com.doitflash.exWebView</id>
-  <versionNumber>1.0</versionNumber>
+  <versionNumber>2.0</versionNumber>
   <supportedProfiles>mobileDevice</supportedProfiles>
   <filename>exWebView</filename>
   <name>exWebView</name>
@@ -14,7 +14,7 @@
 		<uses-permission android:name="android.permission.INTERNET" />
 		
 		<application android:hardwareAccelerated="true" android:allowBackup="true">
-			<activity android:hardwareAccelerated="false">
+			<activity android:hardwareAccelerated="true">
 				<intent-filter>
 					<action android:name="android.intent.action.MAIN" />
 					<category android:name="android.intent.category.LAUNCHER" />

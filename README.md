@@ -1,4 +1,4 @@
-# Rich WebView ANE V1.0 (Android+iOS)
+# Rich WebView ANE V2.0 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash.
 
 checkout here for the commercial version: http://myappsnippet.com/webview-ane/
@@ -23,6 +23,7 @@ _ex.addEventListener(MyWebViewEvent.PAGE_PROGRESS, onPageProgress);
 _ex.addEventListener(MyWebViewEvent.PAGE_FINISHED, onPageFinished);
 _ex.addEventListener(MyWebViewEvent.RECEIVED_SSL_ERROR, onReceivedError);
 _ex.addEventListener(MyWebViewEvent.RECEIVED_MASSAGE_FROM_JS, onReceivedMassage);
+_ex.addEventListener(MyWebViewEvent.SCREENSHOT, onScreenshot);
 
 // you may load an html file on sdcard like this
 var file:File = File.documentsDirectory.resolvePath("webview/index.html");
@@ -61,6 +62,12 @@ function onReceivedMassage(e:MyWebViewEvent):void
 {
 	trace("onReceivedMassage: ", e.param);
 }
+
+function onScreenshot(e:MyWebViewEvent):void
+{
+	var bm:Bitmap = new Bitmap(e.param, "auto", true);
+	this.addChild(bm);
+}
 ```
 
 # Setup Javascript:
@@ -81,3 +88,10 @@ Bridge.call("toVibrate");
 This extension works on Android SDK 9 or higher and iOS 6.1 or higher
 
 This extension does not require any special setup in the air manifest .xml file
+
+# Changelog
+- Jun 16, 2015	>> V1.0: 	
+  - beginning of the journey!
+- Jul 21, 2015	>> V2.0: 	
+  - Added bitmap screenshot
+  - support inline HTML5 video tag

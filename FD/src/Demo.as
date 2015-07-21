@@ -2,49 +2,34 @@ package
 {
 	import com.doitflash.air.extensions.webView.MyWebView;
 	import com.doitflash.air.extensions.webView.MyWebViewEvent;
-	import flash.utils.setTimeout;
-	
 	import com.doitflash.consts.Direction;
 	import com.doitflash.consts.Orientation;
-	
 	import com.doitflash.mobileProject.commonCpuSrc.DeviceInfo;
-	
 	import com.doitflash.starling.utils.list.List;
-	
 	import com.doitflash.text.modules.MySprite;
-	
-	import com.doitflash.tools.sizeControl.FileSizeConvertor;
-	
 	import com.luaye.console.C;
-	
 	import flash.desktop.NativeApplication;
 	import flash.desktop.SystemIdleMode;
-	
+	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
-	
 	import flash.events.Event;
-	import flash.events.StatusEvent;
 	import flash.events.InvokeEvent;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
-	
 	import flash.filesystem.File;
-	
+	import flash.media.Sound;
 	import flash.text.AntiAliasType;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
-	
 	import flash.ui.Keyboard;
 	import flash.ui.Multitouch;
 	import flash.ui.MultitouchInputMode;
-	
-	import flash.media.Sound;
-	import flash.media.SoundChannel;
-	import flash.media.SoundTransform;
+	import com.greensock.TweenMax;
+	import com.greensock.easing.*;
 	
 	/**
 	 * 
@@ -169,14 +154,15 @@ package
 			if (dis.exists) dis.deleteDirectory(true);
 			src.copyTo(dis, true);
 			
-			_ex = new MyWebView(this.stage);
-			trace("stageSize: ", stage.stageWidth, stage.stageHeight);
+			_ex = new MyWebView(this.stage, true, true);
+			C.log("stageSize: ", stage.stageWidth, stage.stageHeight);
 			_ex.addEventListener(MyWebViewEvent.BACK_CLICKED, onBackClicked);
 			_ex.addEventListener(MyWebViewEvent.PAGE_STARTED, onPageStarted);
 			_ex.addEventListener(MyWebViewEvent.PAGE_PROGRESS, onPageProgress);
 			_ex.addEventListener(MyWebViewEvent.PAGE_FINISHED, onPageFinished);
 			_ex.addEventListener(MyWebViewEvent.RECEIVED_MASSAGE_FROM_JS, onReceivedMassage);
 			_ex.addEventListener(MyWebViewEvent.RECEIVED_SSL_ERROR, onReceivedError);
+			_ex.addEventListener(MyWebViewEvent.SCREENSHOT, onScreenshot);
 			
 			var btn1:MySprite = createBtn("openWebView");
 			btn1.addEventListener(MouseEvent.CLICK, openWebViewLocal);
@@ -186,6 +172,7 @@ package
 			{
 				var file:File = File.documentsDirectory.resolvePath("webview/index.html");
 				_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, file);
+				//_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://www.myappsnippet.com");
 			}
 		}
 		
@@ -197,22 +184,21 @@ package
 		
 		private function onPageStarted(e:MyWebViewEvent):void
 		{
-			trace("onPageStarted");
+			C.log("onPageStarted");
 		}
 		
 		private function onPageFinished(e:MyWebViewEvent):void
 		{
-			trace("onPageFinished");
+			C.log("onPageFinished");
 		}
 		
 		private function onPageProgress(e:MyWebViewEvent):void
 		{
-			trace("onPageProgress progress: ", e.param);
+			C.log("onPageProgress progress: ", e.param);
 		}
 		
 		private function onReceivedMassage(e:MyWebViewEvent):void
 		{
-			trace("onReceivedMassage: ", e.param);
 			C.log("onReceivedMassage: ", e.param);
 			
 			var msg:Array;
@@ -303,6 +289,11 @@ package
 					_ex.closeWebView();
 				
 				break;
+				case "toTakeScreenshot":
+				
+					_ex.requestBitmap();
+				
+				break;
 				default:
 			}
 		}
@@ -310,6 +301,30 @@ package
 		private function onReceivedError(e:MyWebViewEvent):void
 		{
 			C.log("onReceivedError: " + e.param);
+		}
+		
+		private function onScreenshot(e:MyWebViewEvent):void
+		{
+			_ex.closeWebView();
+			
+			C.log("onScreenshot: " + e.param);
+			
+			var bm:Bitmap = new Bitmap(e.param, "auto", true);
+			this.addChild(bm);
+			
+			TweenMax.from(bm, 5, {width:100, height:100, onComplete:onZoomDone} );
+			
+			function onZoomDone():void
+			{
+				TweenMax.to(bm, 1, {alpha:0, onComplete:onFadeoutDone} );
+			}
+			
+			function onFadeoutDone():void
+			{
+				removeChild(bm);
+				bm.bitmapData.dispose();
+				bm = null;
+			}
 		}
 		
 		
