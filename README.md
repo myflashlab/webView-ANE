@@ -1,4 +1,4 @@
-# Rich WebView ANE V2.0 (Android+iOS)
+# Rich WebView ANE V3.0 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash.
 
 checkout here for the commercial version: http://myappsnippet.com/webview-ane/
@@ -9,28 +9,34 @@ you may like to see the ANE in action? check this out: https://github.com/myflas
 
 ![WebView ANE](http://myappsnippet.com/wp-content/uploads/2015/06/web-view-adobe-air-extension_preview.jpg)
 
+# Main Features:
+* Call JS funcs from flash and vice versa
+* Control the Scroll position
+* Change the view port size and position at runtime
+* Play video files inside the webview
+* Take full screenshots from your webview object
+* Get GPS location information in to your JS
+* Enable file picker dialog on your HTML input fields
+
 # AS3 API:
 ```actionscript
 import com.doitflash.air.extensions.webView.MyWebView;
 import com.doitflash.air.extensions.webView.MyWebViewEvent;
 
-var _ex:MyWebView = new MyWebView(stage);
+var _ex = new MyWebView(this.stage, true, true, true); // stage, enableBitmapCapture, enableCookies, enableGps
 
 // add listeners
+if(_ex.os == MyWebView.ANDROID) C.log("Android SDK version: ", _ex.sdkVersion);
 _ex.addEventListener(MyWebViewEvent.BACK_CLICKED, onBackClicked);
 _ex.addEventListener(MyWebViewEvent.PAGE_STARTED, onPageStarted);
 _ex.addEventListener(MyWebViewEvent.PAGE_PROGRESS, onPageProgress);
 _ex.addEventListener(MyWebViewEvent.PAGE_FINISHED, onPageFinished);
-_ex.addEventListener(MyWebViewEvent.RECEIVED_SSL_ERROR, onReceivedError);
 _ex.addEventListener(MyWebViewEvent.RECEIVED_MASSAGE_FROM_JS, onReceivedMassage);
+_ex.addEventListener(MyWebViewEvent.RECEIVED_SSL_ERROR, onReceivedError);
 _ex.addEventListener(MyWebViewEvent.SCREENSHOT, onScreenshot);
 
-// you may load an html file on sdcard like this
-var file:File = File.documentsDirectory.resolvePath("webview/index.html");
-_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, file);
-
-// or you may load an online url as follow
-_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://www.google.com/");
+_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.documentsDirectory.resolvePath("webview/index.html"));
+//_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://www.google.com");
 
 function onBackClicked(e:MyWebViewEvent):void
 {
@@ -85,9 +91,27 @@ and on JS side, you can send String messages to flash like this:
 Bridge.call("toVibrate");
 ```
 
-This extension works on Android SDK 9 or higher and iOS 6.1 or higher
+This extension works on Android SDK 10 or higher and iOS 6.1 or higher (lower Android SDKs like Android 2.3.6 will not support HTML5 completly, so you must consider this fact in your HTML/JS logic)
 
-This extension does not require any special setup in the air manifest .xml file
+# Manifest .xml:
+```xml
+<!--required for enabling gps for webview-->
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+<!-- required for html file select buttons -->
+<activity android:name="com.doitflash.webView.Pick" android:theme="@style/Theme.Transparent" />
+
+<!--required for webview GPS access-->
+<key>NSLocationUsageDescription</key>
+<string>I need location, reason 1</string>
+
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>I need location, reason 2</string>
+
+<key>NSLocationAlwaysUsageDescription</key>
+<string>I need location, reason 3</string>
+```
 
 # Changelog
 - Jun 16, 2015	>> V1.0: 	
@@ -95,3 +119,7 @@ This extension does not require any special setup in the air manifest .xml file
 - Jul 21, 2015	>> V2.0: 	
   - Added bitmap screenshot
   - support inline HTML5 video tag
+- Aug 17, 2015	>> V3.0:
+  - Added inputfile picker support
+  - Added Gps support
+  - fixed minor bugs
