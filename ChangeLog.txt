@@ -5,3 +5,7 @@ Jun 16, 2015	>> V1.0: 	beginning of the journey!
 
 Jul 21, 2015	>> V2.0: 	Added bitmap screenshot
 				support inline HTML5 video tag
+
+Aug 17, 2015	>> V3.0: 	Added inputfile picker support
+				Added Gps support
+				fixed minor bugs

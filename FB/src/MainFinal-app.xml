@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <application xmlns="http://ns.adobe.com/air/application/15.0">
   <id>com.doitflash.exWebView</id>
-  <versionNumber>2.0</versionNumber>
+  <versionNumber>3.0.0</versionNumber>
   <supportedProfiles>mobileDevice</supportedProfiles>
   <filename>exWebView</filename>
   <name>exWebView</name>
@@ -11,10 +11,13 @@
 		<uses-sdk android:minSdkVersion="10" android:targetSdkVersion="19" />
 		<uses-permission android:name="android.permission.WAKE_LOCK" />
 		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+		
+		<!--required for enabling gps for webview-->
 		<uses-permission android:name="android.permission.INTERNET" />
+		<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 		
 		<application android:hardwareAccelerated="true" android:allowBackup="true">
-			<activity android:hardwareAccelerated="false">
+			<activity android:hardwareAccelerated="true">
 				<intent-filter>
 					<action android:name="android.intent.action.MAIN" />
 					<category android:name="android.intent.category.LAUNCHER" />
@@ -25,6 +28,9 @@
 					<category android:name="android.intent.category.DEFAULT" />
 				</intent-filter>
 			</activity>
+			
+			<!-- required for html file select buttons -->
+			<activity android:name="com.doitflash.webView.Pick" android:theme="@style/Theme.Transparent" />
 			
 		</application>
 		
@@ -47,6 +53,16 @@
 		<key>UIPrerenderedIcon</key>
 		<true />
 		
+		<!--required for webview GPS access-->
+			<key>NSLocationUsageDescription</key>
+			<string>I need location 1</string>
+			
+			<key>NSLocationWhenInUseUsageDescription</key>
+			<string>I need location 2</string>
+			
+			<key>NSLocationAlwaysUsageDescription</key>
+			<string>I need location 3</string>
+		
 		<key>UIDeviceFamily</key>
 		<array>
 			<!-- iPhone support -->
@@ -67,7 +83,8 @@
     <systemChrome>standard</systemChrome>
     <aspectRatio>portrait</aspectRatio>
   </initialWindow>
-  <extensions>
-    <extensionID>com.doitflash.air.extensions.webView</extensionID>
-  </extensions>
+  
+<extensions>
+        <extensionID>com.doitflash.air.extensions.webView</extensionID>
+    </extensions>
 </application>

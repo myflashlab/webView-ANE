@@ -149,13 +149,13 @@ package
 		
 		private function init():void
 		{
-			var src:File = File.applicationDirectory.resolvePath("webview");
-			var dis:File = File.documentsDirectory.resolvePath("webview");
+			var src:File = File.applicationDirectory.resolvePath("webviewV3.0");
+			var dis:File = File.documentsDirectory.resolvePath("webviewV3.0");
 			if (dis.exists) dis.deleteDirectory(true);
-			src.copyTo(dis, true);
+			if (!dis.exists) src.copyTo(dis, true);
 			
-			_ex = new MyWebView(this.stage, true, true);
-			C.log("stageSize: ", stage.stageWidth, stage.stageHeight);
+			_ex = new MyWebView(this.stage, true, true, true); // stage, enableBitmapCapture, enableCookies, enableGps
+			if(_ex.os == MyWebView.ANDROID) C.log("Android SDK version: ", _ex.sdkVersion);
 			_ex.addEventListener(MyWebViewEvent.BACK_CLICKED, onBackClicked);
 			_ex.addEventListener(MyWebViewEvent.PAGE_STARTED, onPageStarted);
 			_ex.addEventListener(MyWebViewEvent.PAGE_PROGRESS, onPageProgress);
@@ -170,9 +170,8 @@ package
 			
 			function openWebViewLocal(e:MouseEvent):void
 			{
-				var file:File = File.documentsDirectory.resolvePath("webview/index.html");
-				_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, file);
-				//_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "https://github.com/myflashlab/webView-ANE/issues/2");
+				_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.documentsDirectory.resolvePath("webviewV3.0/index.html"));
+				//_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://www.google.com");
 			}
 		}
 		
@@ -184,17 +183,20 @@ package
 		
 		private function onPageStarted(e:MyWebViewEvent):void
 		{
-			C.log("onPageStarted");
+			C.log("onPageStarted = " + e.param);
+			trace("onPageStarted = " + e.param);
 		}
 		
 		private function onPageFinished(e:MyWebViewEvent):void
 		{
 			C.log("onPageFinished");
+			trace("onPageFinished");
 		}
 		
 		private function onPageProgress(e:MyWebViewEvent):void
 		{
 			C.log("onPageProgress progress: ", e.param);
+			trace("onPageProgress progress: ", e.param);
 		}
 		
 		private function onReceivedMassage(e:MyWebViewEvent):void
