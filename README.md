@@ -18,6 +18,10 @@ you may like to see the ANE in action? check this out: https://github.com/myflas
 * Get GPS location information in to your JS
 * Enable file picker dialog on your HTML input fields
 
+Tutorials:
+* [How to enable GPS in Rich Webview ANE?](http://myappsnippet.com/adobe-air-stagewebview-gps/)
+* [How to Open file picker on the input html fields?](http://myappsnippet.com/adobe-air-html-file-pick-webview/)
+
 # AS3 API:
 ```actionscript
 import com.doitflash.air.extensions.webView.MyWebView;
