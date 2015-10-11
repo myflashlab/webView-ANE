@@ -18,7 +18,9 @@ package
 	import flash.events.InvokeEvent;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import flash.events.StatusEvent;
 	import flash.filesystem.File;
+	import flash.geom.Rectangle;
 	import flash.media.Sound;
 	import flash.text.AntiAliasType;
 	import flash.text.TextField;
@@ -30,10 +32,13 @@ package
 	import flash.ui.MultitouchInputMode;
 	import com.greensock.TweenMax;
 	import com.greensock.easing.*;
+	import flash.utils.setTimeout;
+	
+	import com.doitflash.tools.DynamicFunc;
 	
 	/**
 	 * 
-	 * @author Hadi Tavakoli - 8/18/2015 1:13 PM
+	 * @author Hadi Tavakoli - 10/11/2015 4:14 PM
 	 */
 	public class Demo extends Sprite 
 	{
@@ -149,12 +154,12 @@ package
 		
 		private function init():void
 		{
-			var src:File = File.applicationDirectory.resolvePath("webviewV3.0");
-			var dis:File = File.documentsDirectory.resolvePath("webviewV3.0");
+			var src:File = File.applicationDirectory.resolvePath("webviewV4.0");
+			var dis:File = File.documentsDirectory.resolvePath("webviewV4.0");
 			if (dis.exists) dis.deleteDirectory(true);
 			if (!dis.exists) src.copyTo(dis, true);
 			
-			_ex = new MyWebView(this.stage, true, true, true); // stage, enableBitmapCapture, enableCookies, enableGps
+			_ex = new MyWebView(this.stage, true, true, true, true); // stage, enableBitmapCapture, enableCookies, enableGps, enableZoom
 			if(_ex.os == MyWebView.ANDROID) C.log("Android SDK version: ", _ex.sdkVersion);
 			_ex.addEventListener(MyWebViewEvent.BACK_CLICKED, onBackClicked);
 			_ex.addEventListener(MyWebViewEvent.PAGE_STARTED, onPageStarted);
@@ -170,7 +175,7 @@ package
 			
 			function openWebViewLocal(e:MouseEvent):void
 			{
-				_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.documentsDirectory.resolvePath("webviewV3.0/index.html"));
+				_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.documentsDirectory.resolvePath("webviewV4.0/index.html"));
 				//_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://www.google.com");
 			}
 		}
@@ -202,102 +207,7 @@ package
 		private function onReceivedMassage(e:MyWebViewEvent):void
 		{
 			C.log("onReceivedMassage: ", e.param);
-			
-			var msg:Array;
-			if (_ex.os == MyWebView.ANDROID) msg = String(e.param).split("|");
-			else if(_ex.os == MyWebView.IOS) msg = String(e.param).split("%7C");
-			var command:String = msg[0];
-			
-			switch (command) 
-			{
-				case "toPlaySound":
-				
-					var voice:Sound = (new MySound) as Sound;
-					voice.play();
-				
-				break;
-				case "toOpenJSAlert":
-				
-					_ex.callJS("diplayAlert('This is a message from Flash!')");
-				
-				break;
-				case "changePosition":
-				
-					_ex.setPosition(msg[1], msg[2], (stage.stageWidth - msg[3]), (stage.stageHeight - msg[4]));
-				
-				break;
-				case "pageDown":
-				
-					_ex.pageDown(false);
-				
-				break;
-				case "endPage":
-				
-					_ex.pageDown(true);
-				
-				break;
-				case "pageUp":
-				
-					_ex.pageUp(false);
-				
-				break;
-				case "firstPage":
-				
-					_ex.pageUp(true);
-				
-				break;
-				case "zoomIn":
-				
-					if (_ex.os == MyWebView.IOS)
-					{
-						_ex.maximumZoomScale = 5;
-						_ex.minimumZoomScale = 0.5;
-					}
-					_ex.zoomIn();
-				
-				break;
-				case "zoomOut":
-				
-					if (_ex.os == MyWebView.IOS)
-					{
-						_ex.maximumZoomScale = 5;
-						_ex.minimumZoomScale = 0.5;
-					}
-					_ex.zoomOut();
-				
-				break;
-				case "reload":
-				
-					_ex.reload();
-				
-				break;
-				case "flingScroll":
-				
-					_ex.filingScroll(msg[1], msg[2]);
-					
-				break;
-				case "scrollBy":
-				
-					_ex.scrollBy(msg[1], msg[2]);
-				
-				break;
-				case "scrollTo":
-				
-					_ex.scrollTo(_ex.scrollX, (_ex.scrollY + int(msg[1])));
-				
-				break;
-				case "closeWebView":
-				
-					_ex.closeWebView();
-				
-				break;
-				case "toTakeScreenshot":
-				
-					_ex.requestBitmap();
-				
-				break;
-				default:
-			}
+			DynamicFunc.run(this, e.param);
 		}
 		
 		private function onReceivedError(e:MyWebViewEvent):void
@@ -329,7 +239,66 @@ package
 			}
 		}
 		
+// --------------------------------------------------------------------------------- funcs to be called from JS
+	
+		public function closeWebView():void
+		{
+			_ex.closeWebView();
+		}
 		
+		public function toOpenJSAlert():void
+		{
+			_ex.callJS("diplayAlert('This is a message from Flash!')");
+		}
+		
+		public function toPlaySound():void
+		{
+			var voice:Sound = (new MySound) as Sound;
+			voice.play();
+		}
+		
+		public function changePosition($marginLeft:Number, $marginTop:Number, $marginRight:Number, $marginBottom:Number):void
+		{
+			_ex.setViewPort(new Rectangle($marginLeft, $marginTop, (stage.stageWidth - $marginRight), (stage.stageHeight - $marginBottom)));
+		}
+		
+		public function pageUp($value:Boolean):void
+		{
+			_ex.pageUp($value);
+		}
+		
+		public function pageDown($value:Boolean):void
+		{
+			_ex.pageDown($value);
+		}
+		
+		public function zoomIn():void
+		{
+			if (_ex.os == MyWebView.IOS)
+			{
+				_ex.maximumZoomScale = 5;
+				_ex.minimumZoomScale = 0.5;
+			}
+			
+			_ex.zoomIn();
+		}
+		
+		public function zoomOut():void
+		{
+			if (_ex.os == MyWebView.IOS)
+			{
+				_ex.maximumZoomScale = 5;
+				_ex.minimumZoomScale = 0.5;
+			}
+			_ex.zoomOut();
+		}
+		
+		public function toTakeScreenshot():void
+		{
+			_ex.requestBitmap();
+		}
+	
+// ------------------------------------------------------------------------------------------------------------
 		
 		
 		

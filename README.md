@@ -1,7 +1,7 @@
-# Rich WebView ANE V3.0 (Android+iOS)
-This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash.
+# Rich WebView ANE V4.0 (Android+iOS)
+This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
-checkout here for the commercial version: http://myappsnippet.com/webview-ane/
+checkout here for the commercial version: http://myappsnippet.com/product/webview-ane/
 
 you may like to see the ANE in action? check this out: https://github.com/myflashlab/webView-ANE/tree/master/FD/dist
 
@@ -17,6 +17,7 @@ you may like to see the ANE in action? check this out: https://github.com/myflas
 * Take full screenshots from your webview object
 * Get GPS location information in to your JS
 * Enable file picker dialog on your HTML input fields
+* change viewport and position of webview at runtime
 
 Tutorials:
 * [How to enable GPS in Rich Webview ANE?](http://myappsnippet.com/adobe-air-stagewebview-gps/)
@@ -27,7 +28,7 @@ Tutorials:
 import com.doitflash.air.extensions.webView.MyWebView;
 import com.doitflash.air.extensions.webView.MyWebViewEvent;
 
-var _ex = new MyWebView(this.stage, true, true, true); // stage, enableBitmapCapture, enableCookies, enableGps
+var _ex = new MyWebView(this.stage, true, true, true, true); // stage, enableBitmapCapture, enableCookies, enableGps, enableZoom
 
 // add listeners
 if(_ex.os == MyWebView.ANDROID) C.log("Android SDK version: ", _ex.sdkVersion);
@@ -127,3 +128,8 @@ This extension works on Android SDK 10 or higher and iOS 6.1 or higher (lower An
   - Added inputfile picker support
   - Added Gps support
   - fixed minor bugs
+- Oct 11, 2015	>> V4.0:
+  - Added support for user zoom pinch
+  - updated load methods to be able to load new pages without the need to dispose the webview at first. This improves user expirience a lot.
+  - depricated 'setPosition' for the favor of the new method 'setViewPort'
+  - added x, y, width and height properties to the extension so it can be a lot easier to manage its dimension on the stage
