@@ -1,4 +1,4 @@
-# Rich WebView ANE V4.0 (Android+iOS)
+# Rich WebView ANE V4.9 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 checkout here for the commercial version: http://myappsnippet.com/product/webview-ane/
@@ -25,56 +25,56 @@ Tutorials:
 
 # AS3 API:
 ```actionscript
-import com.doitflash.air.extensions.webView.MyWebView;
-import com.doitflash.air.extensions.webView.MyWebViewEvent;
+import com.myflashlab.air.extensions.webView.RichWebView;
+import com.myflashlab.air.extensions.webView.RichWebViewEvent;
 
-var _ex = new MyWebView(this.stage, true, true, true, true); // stage, enableBitmapCapture, enableCookies, enableGps, enableZoom
+var _ex = new RichWebView(this.stage, true, true, true, true); // stage, enableBitmapCapture, enableCookies, enableGps, enableZoom
 
 // add listeners
-if(_ex.os == MyWebView.ANDROID) C.log("Android SDK version: ", _ex.sdkVersion);
-_ex.addEventListener(MyWebViewEvent.BACK_CLICKED, onBackClicked);
-_ex.addEventListener(MyWebViewEvent.PAGE_STARTED, onPageStarted);
-_ex.addEventListener(MyWebViewEvent.PAGE_PROGRESS, onPageProgress);
-_ex.addEventListener(MyWebViewEvent.PAGE_FINISHED, onPageFinished);
-_ex.addEventListener(MyWebViewEvent.RECEIVED_MASSAGE_FROM_JS, onReceivedMassage);
-_ex.addEventListener(MyWebViewEvent.RECEIVED_SSL_ERROR, onReceivedError);
-_ex.addEventListener(MyWebViewEvent.SCREENSHOT, onScreenshot);
+if(_ex.os == RichWebView.ANDROID) C.log("Android SDK version: ", _ex.sdkVersion);
+_ex.addEventListener(RichWebViewEvent.BACK_CLICKED, onBackClicked);
+_ex.addEventListener(RichWebViewEvent.PAGE_STARTED, onPageStarted);
+_ex.addEventListener(RichWebViewEvent.PAGE_PROGRESS, onPageProgress);
+_ex.addEventListener(RichWebViewEvent.PAGE_FINISHED, onPageFinished);
+_ex.addEventListener(RichWebViewEvent.RECEIVED_MASSAGE_FROM_JS, onReceivedMassage);
+_ex.addEventListener(RichWebViewEvent.RECEIVED_SSL_ERROR, onReceivedError);
+_ex.addEventListener(RichWebViewEvent.SCREENSHOT, onScreenshot);
 
 _ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.documentsDirectory.resolvePath("webview/index.html"));
 //_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://www.google.com");
 
-function onBackClicked(e:MyWebViewEvent):void
+function onBackClicked(e:RichWebViewEvent):void
 {
 	if (_ex.canGoBack) _ex.goBack();
 	else _ex.closeWebView();
 }
 
-function onPageStarted(e:MyWebViewEvent):void
+function onPageStarted(e:RichWebViewEvent):void
 {
 	trace("page started to be loaded");
 }
 
-function onPageProgress(e:MyWebViewEvent):void
+function onPageProgress(e:RichWebViewEvent):void
 {
 	trace("page loading: " + e.param + "%");
 }
 
-function onPageFinished(e:MyWebViewEvent):void
+function onPageFinished(e:RichWebViewEvent):void
 {
 	trace("page load completed");
 }
 
-function onReceivedError(e:MyWebViewEvent):void
+function onReceivedError(e:RichWebViewEvent):void
 {
 	trace("error = " + e.param);
 }
 
-function onReceivedMassage(e:MyWebViewEvent):void
+function onReceivedMassage(e:RichWebViewEvent):void
 {
 	trace("onReceivedMassage: ", e.param);
 }
 
-function onScreenshot(e:MyWebViewEvent):void
+function onScreenshot(e:RichWebViewEvent):void
 {
 	var bm:Bitmap = new Bitmap(e.param, "auto", true);
 	this.addChild(bm);
@@ -133,3 +133,5 @@ This extension works on Android SDK 10 or higher and iOS 6.1 or higher (lower An
   - updated load methods to be able to load new pages without the need to dispose the webview at first. This improves user expirience a lot.
   - depricated 'setPosition' for the favor of the new method 'setViewPort'
   - added x, y, width and height properties to the extension so it can be a lot easier to manage its dimension on the stage
+- Nov 03, 2015	>> V4.9:	
+  - doitflash devs merged into MyFLashLab Team.

@@ -14,3 +14,5 @@ Oct 11, 2015	>> V4.0: 	Added support for user zoom pinch
 				updated load methods to be able to load new pages without the need to dispose the webview at first. This improves user expirience a lot.
 				depricated 'setPosition' for the favor of the new method 'setViewPort'
 				added x, y, width and height properties to the extension so it can be a lot easier to manage its dimension on the stage
+
+Nov 03, 2015	>> V4.9:	doitflash devs merged into MyFLashLab Team.

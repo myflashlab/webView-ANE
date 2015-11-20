@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/15.0">
   <id>com.doitflash.exWebView</id>
-  <versionNumber>3.0</versionNumber>
+  <versionNumber>4.9</versionNumber>
   <supportedProfiles>mobileDevice</supportedProfiles>
   <filename>exWebView</filename>
-  <name>exWebView</name>
+  <name>Rich Webview</name>
   <android>
     <manifestAdditions>
 		<![CDATA[<manifest android:installLocation="auto">
@@ -91,6 +91,6 @@
     <image512x512>icons/icon_512.png</image512x512>
   </icon>
   <extensions>
-    <extensionID>com.doitflash.air.extensions.webView</extensionID>
+    <extensionID>com.myflashlab.air.extensions.webView</extensionID>
   </extensions>
 </application>

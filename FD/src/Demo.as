@@ -1,7 +1,7 @@
 package 
 {
-	import com.doitflash.air.extensions.webView.MyWebView;
-	import com.doitflash.air.extensions.webView.MyWebViewEvent;
+	import com.myflashlab.air.extensions.webView.RichWebView;
+	import com.myflashlab.air.extensions.webView.RichWebViewEvent;
 	import com.doitflash.consts.Direction;
 	import com.doitflash.consts.Orientation;
 	import com.doitflash.mobileProject.commonCpuSrc.DeviceInfo;
@@ -42,7 +42,7 @@ package
 	 */
 	public class Demo extends Sprite 
 	{
-		private var _ex:MyWebView;
+		private var _ex:RichWebView;
 		
 		private const BTN_WIDTH:Number = 150;
 		private const BTN_HEIGHT:Number = 60;
@@ -83,7 +83,7 @@ package
 			_txt.multiline = true;
 			_txt.wordWrap = true;
 			_txt.embedFonts = false;
-			_txt.htmlText = "<font face='Arimo' color='#333333' size='20'><b>Rich WebView V" + MyWebView.VERSION + " for adobe air</b></font>";
+			_txt.htmlText = "<font face='Arimo' color='#333333' size='20'><b>Rich WebView V" + RichWebView.VERSION + " for adobe air</b></font>";
 			_txt.scaleX = _txt.scaleY = DeviceInfo.dpiScaleMultiplier;
 			this.addChild(_txt);
 			
@@ -159,15 +159,15 @@ package
 			if (dis.exists) dis.deleteDirectory(true);
 			if (!dis.exists) src.copyTo(dis, true);
 			
-			_ex = new MyWebView(this.stage, true, true, true, true); // stage, enableBitmapCapture, enableCookies, enableGps, enableZoom
-			if(_ex.os == MyWebView.ANDROID) C.log("Android SDK version: ", _ex.sdkVersion);
-			_ex.addEventListener(MyWebViewEvent.BACK_CLICKED, onBackClicked);
-			_ex.addEventListener(MyWebViewEvent.PAGE_STARTED, onPageStarted);
-			_ex.addEventListener(MyWebViewEvent.PAGE_PROGRESS, onPageProgress);
-			_ex.addEventListener(MyWebViewEvent.PAGE_FINISHED, onPageFinished);
-			_ex.addEventListener(MyWebViewEvent.RECEIVED_MASSAGE_FROM_JS, onReceivedMassage);
-			_ex.addEventListener(MyWebViewEvent.RECEIVED_SSL_ERROR, onReceivedError);
-			_ex.addEventListener(MyWebViewEvent.SCREENSHOT, onScreenshot);
+			_ex = new RichWebView(this.stage, true, true, true, true); // stage, enableBitmapCapture, enableCookies, enableGps, enableZoom
+			if(_ex.os == RichWebView.ANDROID) C.log("Android SDK version: ", _ex.sdkVersion);
+			_ex.addEventListener(RichWebViewEvent.BACK_CLICKED, onBackClicked);
+			_ex.addEventListener(RichWebViewEvent.PAGE_STARTED, onPageStarted);
+			_ex.addEventListener(RichWebViewEvent.PAGE_PROGRESS, onPageProgress);
+			_ex.addEventListener(RichWebViewEvent.PAGE_FINISHED, onPageFinished);
+			_ex.addEventListener(RichWebViewEvent.RECEIVED_MASSAGE_FROM_JS, onReceivedMassage);
+			_ex.addEventListener(RichWebViewEvent.RECEIVED_SSL_ERROR, onReceivedError);
+			_ex.addEventListener(RichWebViewEvent.SCREENSHOT, onScreenshot);
 			
 			var btn1:MySprite = createBtn("openWebView");
 			btn1.addEventListener(MouseEvent.CLICK, openWebViewLocal);
@@ -180,42 +180,42 @@ package
 			}
 		}
 		
-		private function onBackClicked(e:MyWebViewEvent):void
+		private function onBackClicked(e:RichWebViewEvent):void
 		{
 			if (_ex.canGoBack) _ex.goBack();
 			else _ex.closeWebView();
 		}
 		
-		private function onPageStarted(e:MyWebViewEvent):void
+		private function onPageStarted(e:RichWebViewEvent):void
 		{
 			C.log("onPageStarted = " + e.param);
 			trace("onPageStarted = " + e.param);
 		}
 		
-		private function onPageFinished(e:MyWebViewEvent):void
+		private function onPageFinished(e:RichWebViewEvent):void
 		{
 			C.log("onPageFinished");
 			trace("onPageFinished");
 		}
 		
-		private function onPageProgress(e:MyWebViewEvent):void
+		private function onPageProgress(e:RichWebViewEvent):void
 		{
 			C.log("onPageProgress progress: ", e.param);
 			trace("onPageProgress progress: ", e.param);
 		}
 		
-		private function onReceivedMassage(e:MyWebViewEvent):void
+		private function onReceivedMassage(e:RichWebViewEvent):void
 		{
 			C.log("onReceivedMassage: ", e.param);
 			DynamicFunc.run(this, e.param);
 		}
 		
-		private function onReceivedError(e:MyWebViewEvent):void
+		private function onReceivedError(e:RichWebViewEvent):void
 		{
 			C.log("onReceivedError: " + e.param);
 		}
 		
-		private function onScreenshot(e:MyWebViewEvent):void
+		private function onScreenshot(e:RichWebViewEvent):void
 		{
 			_ex.closeWebView();
 			
@@ -274,7 +274,7 @@ package
 		
 		public function zoomIn():void
 		{
-			if (_ex.os == MyWebView.IOS)
+			if (_ex.os == RichWebView.IOS)
 			{
 				_ex.maximumZoomScale = 5;
 				_ex.minimumZoomScale = 0.5;
@@ -285,7 +285,7 @@ package
 		
 		public function zoomOut():void
 		{
-			if (_ex.os == MyWebView.IOS)
+			if (_ex.os == RichWebView.IOS)
 			{
 				_ex.maximumZoomScale = 5;
 				_ex.minimumZoomScale = 0.5;

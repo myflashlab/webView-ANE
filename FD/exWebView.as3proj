@@ -12,7 +12,7 @@
     <movie minorVersion="0" />
     <movie platform="AIR Mobile" />
     <movie background="#F0F0F0" />
-    <movie preferredSDK="Flex 4.6.0, AIR 18.0;4.6.0, 18.0;" />
+    <movie preferredSDK="Flex 4.6.0, AIR 19.0;4.6.0, 19.0;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -63,6 +63,7 @@
     <element path="lib\downloadManager.ane" />
     <element path="lib\webView.ane" />
     <element path="lib\greensock.swc" />
+    <element path="lib\richWebView.ane" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

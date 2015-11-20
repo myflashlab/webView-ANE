@@ -19,8 +19,8 @@ set IOS_DIST_CERT_FILE=cert\CertificatesDistribute.p12
 set IOS_DEV_CERT_FILE=cert\certificate_dev.p12
 set IOS_DEV_CERT_PASS=pass
 set IOS_PROVISION_DEV=cert\comDoitflash.mobileprovision
-set IOS_PROVISION_DIST=cert\adHoc_exAR.mobileprovision
-set IOS_PROVISION_ADHOC=cert\adHoc_exAR.mobileprovision
+set IOS_PROVISION_DIST=cert\AdHocDoitflash.mobileprovision
+set IOS_PROVISION_ADHOC=cert\AdHocDoitflash.mobileprovision
 set IOS_ICONS=icons/ios
 
 set IOS_DEV_SIGNING_OPTIONS=-hideAneLibSymbols yes -storetype pkcs12 -keystore "%IOS_DEV_CERT_FILE%" -storepass %IOS_DEV_CERT_PASS% -provisioning-profile %IOS_PROVISION_DEV%
@@ -42,7 +42,7 @@ set DIST_PATH=dist
 set DIST_NAME=exWebView
 
 :: Debugging using a custom IP
-set DEBUG_IP=192.168.0.12
+set DEBUG_IP=192.168.0.11
 
 
 

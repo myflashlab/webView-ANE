@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'10/11/2015'</value>
+      <value>'11/20/2015'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -34,16 +34,16 @@
     <omit-trace-statements>true</omit-trace-statements>
     <verbose-stacktraces>false</verbose-stacktraces>
     <source-path append="true">
-      <path-element>E:\project\products\AIR_EXTENSIONS\webView\V4.0\FD\src</path-element>
+      <path-element>E:\project\products\MyFlashLab_ANEs\webView\V4.0\FD\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
-      <path-element>E:\project\products\AIR_EXTENSIONS\webView\V4.0\FD\lib\webView.ane</path-element>
-      <path-element>E:\project\products\AIR_EXTENSIONS\webView\V4.0\FD\lib\greensock.swc</path-element>
+      <path-element>E:\project\products\MyFlashLab_ANEs\webView\V4.0\FD\lib\greensock.swc</path-element>
+      <path-element>E:\project\products\MyFlashLab_ANEs\webView\V4.0\FD\lib\richWebView.ane</path-element>
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>E:\project\products\AIR_EXTENSIONS\webView\V4.0\FD\src\Demo.as</path-element>
+    <path-element>E:\project\products\MyFlashLab_ANEs\webView\V4.0\FD\src\Demo.as</path-element>
   </file-specs>
   <default-background-color>#F0F0F0</default-background-color>
   <default-frame-rate>30</default-frame-rate>

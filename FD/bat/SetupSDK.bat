@@ -1,11 +1,11 @@
 :user_configuration
 
 :: Path to Flex SDK
-set FLEX_SDK=D:\Program Files\Adobe\flex_sdk_4.6_air_sdk_15-356
+set FLEX_SDK=C:\flex_sdk_4.6_air_sdk_19-190
 set AUTO_INSTALL_IOS=yes
 
 :: Path to Android SDK
-set ANDROID_SDK=D:\android
+set ANDROID_SDK=C:\android
 
 :: Path to Java SDK
 set JAVA_SDK=C:\Program Files (x86)\Java\jdk1.7.0_04
