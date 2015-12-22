@@ -1,7 +1,7 @@
-# Rich WebView ANE V4.9 (Android+iOS)
+# Rich WebView ANE V4.9.1 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
-checkout here for the commercial version: http://myappsnippet.com/product/webview-ane/
+checkout here for the commercial version: http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 
 you may like to see the ANE in action? check this out: https://github.com/myflashlab/webView-ANE/tree/master/FD/dist
 
@@ -134,4 +134,4 @@ This extension works on Android SDK 10 or higher and iOS 6.1 or higher (lower An
   - depricated 'setPosition' for the favor of the new method 'setViewPort'
   - added x, y, width and height properties to the extension so it can be a lot easier to manage its dimension on the stage
 - Nov 03, 2015	>> V4.9:	
-  - doitflash devs merged into MyFLashLab Team.
+  - doitflash devs merged into MyFLashLabs Team.

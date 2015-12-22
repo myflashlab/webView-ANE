@@ -159,6 +159,10 @@ package
 			if (dis.exists) dis.deleteDirectory(true);
 			if (!dis.exists) src.copyTo(dis, true);
 			
+			// required only if you are a member of the club
+			RichWebView.clubId = "paypal-address-you-used-to-join-the-club"; 
+			
+			// make sure stage is not null when you're initializing RichWebView
 			_ex = new RichWebView(this.stage, true, true, true, true); // stage, enableBitmapCapture, enableCookies, enableGps, enableZoom
 			if(_ex.os == RichWebView.ANDROID) C.log("Android SDK version: ", _ex.sdkVersion);
 			_ex.addEventListener(RichWebViewEvent.BACK_CLICKED, onBackClicked);

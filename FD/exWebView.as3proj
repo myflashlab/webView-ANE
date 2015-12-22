@@ -4,14 +4,14 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="bin\exWebView.swf" />
+    <movie path="bin\ex.swf" />
     <movie fps="30" />
     <movie width="480" />
     <movie height="762" />
-    <movie version="17" />
+    <movie version="19" />
     <movie minorVersion="0" />
     <movie platform="AIR Mobile" />
-    <movie background="#F0F0F0" />
+    <movie background="#FFFFFF" />
     <movie preferredSDK="Flex 4.6.0, AIR 19.0;4.6.0, 19.0;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
@@ -43,7 +43,7 @@
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />
-    <option additional="-swf-version=25" />
+    <option additional="-swf-version=30" />
     <option compilerConstants="" />
     <option minorVersion="" />
   </build>
@@ -53,16 +53,10 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <element path="lib\sms-share-toast.ane" />
-    <element path="lib\notification.ane" />
-    <element path="lib\alert-dialog-notification-progress-properties-toast.ane" />
-    <element path="lib\StageWebViewBridge.swc" />
-    <element path="lib\AIR3Extension.ane" />
-    <element path="lib\openCV.ane" />
-    <element path="lib\ar.ane" />
-    <element path="lib\downloadManager.ane" />
-    <element path="lib\webView.ane" />
     <element path="lib\greensock.swc" />
+    <element path="lib\commonDependenciesV3.0.ane" />
+    <element path="lib\barcodeExtension.ane" />
+    <element path="lib\downloadManager.ane" />
     <element path="lib\richWebView.ane" />
   </libraryPaths>
   <!-- External Libraries -->
@@ -97,11 +91,8 @@
   <options>
     <option showHiddenPaths="False" />
     <option testMovie="Custom" />
-    <option testMovieCommand="Run.bat" />
+    <option testMovieCommand="bat\RunApp.bat" />
   </options>
   <!-- Plugin storage -->
-  <storage>
-    <entry key="at_enabled"><![CDATA[0]]></entry>
-    <entry key="at_password"><![CDATA[]]></entry>
-  </storage>
+  <storage />
 </project>

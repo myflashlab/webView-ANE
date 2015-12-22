@@ -16,3 +16,4 @@ Oct 11, 2015	>> V4.0: 	Added support for user zoom pinch
 				added x, y, width and height properties to the extension so it can be a lot easier to manage its dimension on the stage
 
 Nov 03, 2015	>> V4.9:	doitflash devs merged into MyFLashLab Team.
+Dec 20, 2015 	>> V4.9.1: 	minor bug fixes

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<application xmlns="http://ns.adobe.com/air/application/15.0">
+<application xmlns="http://ns.adobe.com/air/application/19.0">
   <id>com.doitflash.exWebView</id>
-  <versionNumber>4.9</versionNumber>
+  <versionNumber>4.9.1</versionNumber>
   <supportedProfiles>mobileDevice</supportedProfiles>
   <filename>exWebView</filename>
   <name>Rich Webview</name>
@@ -75,20 +75,27 @@
   </iPhone>
   <initialWindow>
     <title>exWebView</title>
-    <content>exWebView.swf</content>
+    <content>ex.swf</content>
     <visible>true</visible>
     <fullScreen>true</fullScreen>
     <autoOrients>false</autoOrients>
-    <renderMode>direct</renderMode>
-    <systemChrome>standard</systemChrome>
     <aspectRatio>portrait</aspectRatio>
+    <renderMode>direct</renderMode>
+    <!--<depthAndStencil>true</depthAndStencil>-->
+    <!-- required for 3D -->
+    <systemChrome>standard</systemChrome>
   </initialWindow>
   <icon>
     <image48x48>icons/icon_48.png</image48x48>
     <image57x57>icons/icon_57.png</image57x57>
     <image72x72>icons/icon_72.png</image72x72>
+    <image76x76>icons/icon_76.png</image76x76>
+    <image96x96>icons/icon_96.png</image96x96>
     <image114x114>icons/icon_114.png</image114x114>
-    <image512x512>icons/icon_512.png</image512x512>
+    <image120x120>icons/icon_120.png</image120x120>
+    <image144x144>icons/icon_144.png</image144x144>
+    <image152x152>icons/icon_152.png</image152x152>
+    <!--<image512x512>icons/icon_512.png</image512x512>-->
   </icon>
   <extensions>
     <extensionID>com.myflashlab.air.extensions.webView</extensionID>
