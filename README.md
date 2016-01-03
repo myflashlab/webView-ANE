@@ -139,4 +139,4 @@ This extension works on Android SDK 10 or higher and iOS 6.1 or higher (lower An
   - From this version, you must call AirBridge.evoke() method to call functions on the Air side. so make sure you have studied and tested the extension fully before adding it into your projects which is using older versions of this extension.
   
 # NOTICES
-If you are receiving error message ```Compilation failed while executing : ld64``` Please ![read this disscussion](https://forums.adobe.com/thread/2055508). Adobe is aware of this problem and they are working on it to fix it.
+If you are receiving error message ```Compilation failed while executing : ld64``` Please read this disscussion https://forums.adobe.com/thread/2055508 Adobe is aware of this problem and they are working on it to fix it.
