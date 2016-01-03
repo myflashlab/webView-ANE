@@ -1,4 +1,4 @@
-# Rich WebView ANE V4.9.1 (Android+iOS)
+# Rich WebView ANE V5.0 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 checkout here for the commercial version: http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
@@ -7,10 +7,10 @@ you may like to see the ANE in action? check this out: https://github.com/myflas
 
 **NOTICE: the demo ANE works only after you hit the "OK" button in the dialog which opens. in your tests make sure that you are NOT calling other ANE methods prior to hitting the "OK" button.**
 
-![WebView ANE](http://myappsnippet.com/wp-content/uploads/2015/06/web-view-adobe-air-extension_preview.jpg)
+![WebView ANE](http://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-rich-webview-595x738.jpg)
 
 # Main Features:
-* Call JS funcs from flash and vice versa
+* Call JS funcs from Air and vice versa
 * Control the Scroll position
 * Change the view port size and position at runtime
 * Play video files inside the webview
@@ -20,8 +20,8 @@ you may like to see the ANE in action? check this out: https://github.com/myflas
 * change viewport and position of webview at runtime
 
 Tutorials:
-* [How to enable GPS in Rich Webview ANE?](http://myappsnippet.com/adobe-air-stagewebview-gps/)
-* [How to Open file picker on the input html fields?](http://myappsnippet.com/adobe-air-html-file-pick-webview/)
+* [How to enable GPS in Rich Webview ANE?](http://www.myflashlabs.com/adobe-air-stagewebview-gps/)
+* [How to Open file picker on the input html fields?](http://www.myflashlabs.com/adobe-air-html-file-pick-webview/)
 
 # AS3 API:
 ```actionscript
@@ -40,7 +40,7 @@ _ex.addEventListener(RichWebViewEvent.RECEIVED_MASSAGE_FROM_JS, onReceivedMassag
 _ex.addEventListener(RichWebViewEvent.RECEIVED_SSL_ERROR, onReceivedError);
 _ex.addEventListener(RichWebViewEvent.SCREENSHOT, onScreenshot);
 
-_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.documentsDirectory.resolvePath("webview/index.html"));
+_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.documentsDirectory.resolvePath("webview/index.html")); // OR from File.applicationStorageDirectory
 //_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://www.google.com");
 
 function onBackClicked(e:RichWebViewEvent):void
@@ -82,18 +82,14 @@ function onScreenshot(e:RichWebViewEvent):void
 ```
 
 # Setup Javascript:
-to be able to interact with your flash app from JS, you need to import our little .js file named "Bridge.js" which you can find in **bin/webview** folder and in your html files, all you have to do is to import this little js into the head tag like this
-```html
-<script type="text/javascript" src="Bridge.js"></script>
-```
-Now, you are able to easily call JS functions from flash like this:
+You are able to easily call JS functions from Air like this:
 ```actionscript
-_ex.callJS("diplayAlert('This is a message from Flash!')");
+_ex.callJS("diplayAlert('This is a message from AdobeAir!')");
 ```
 
-and on JS side, you can send String messages to flash like this:
+and on JS side, you can send String messages to Air like this:
 ```javascript
-Bridge.call("toVibrate");
+AirBridge.evoke("toVibrate");
 ```
 
 This extension works on Android SDK 10 or higher and iOS 6.1 or higher (lower Android SDKs like Android 2.3.6 will not support HTML5 completly, so you must consider this fact in your HTML/JS logic)
@@ -133,5 +129,14 @@ This extension works on Android SDK 10 or higher and iOS 6.1 or higher (lower An
   - updated load methods to be able to load new pages without the need to dispose the webview at first. This improves user expirience a lot.
   - depricated 'setPosition' for the favor of the new method 'setViewPort'
   - added x, y, width and height properties to the extension so it can be a lot easier to manage its dimension on the stage
-- Nov 03, 2015	>> V4.9:	
+- Nov 03, 2015	>> V4.9:
   - doitflash devs merged into MyFLashLabs Team.
+- Jan 03, 2016	>> V5.0:
+  - added support for loading local html files from File.applicationStorageDirectory too.
+  - the bridge javascript code will now be injected into html pages automatically from the extension so you don't have to add the js file to your html content anymore.
+  - When using RichWebview ANE, there is a "AirBridge.js" file on the root next to the main Air .swf file and you should NOT move or rename this file because native side is using this file to inject js functions into loaded html pages.
+  - You may use this js file to add your own js functions to inject along with our current code which is necesary for the ANE to function correctly.
+  - From this version, you must call AirBridge.evoke() method to call functions on the Air side. so make sure you have studied and tested the extension fully before adding it into your projects which is using older versions of this extension.
+  
+# NOTICES
+If you are receiving error message ```Compilation failed while executing : ld64``` Please ![read this disscussion](https://forums.adobe.com/thread/2055508). Adobe is aware of this problem and they are working on it to fix it.

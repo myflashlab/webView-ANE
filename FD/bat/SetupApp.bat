@@ -25,9 +25,9 @@ set IOS_PROVISION_DIST=cert\AdHocDoitflash.mobileprovision
 set IOS_PROVISION_ADHOC=cert\AdHocDoitflash.mobileprovision
 set IOS_ICONS=icons/ios
 
-set IOS_DEV_SIGNING_OPTIONS=-hideAneLibSymbols yes -storetype pkcs12 -keystore "%IOS_DEV_CERT_FILE%" -storepass %IOS_DEV_CERT_PASS% -provisioning-profile %IOS_PROVISION_DEV%
-set IOS_DIST_SIGNING_OPTIONS=-hideAneLibSymbols yes -useLegacyAOT yes -storetype pkcs12 -keystore "%IOS_DIST_CERT_FILE%" -provisioning-profile %IOS_PROVISION_DIST%
-set IOS_ADHOC_SIGNING_OPTIONS=-hideAneLibSymbols yes -useLegacyAOT yes -storetype pkcs12 -keystore "%IOS_DIST_CERT_FILE%" -provisioning-profile %IOS_PROVISION_ADHOC%
+set IOS_DEV_SIGNING_OPTIONS=-hideAneLibSymbols no -storetype pkcs12 -keystore "%IOS_DEV_CERT_FILE%" -storepass %IOS_DEV_CERT_PASS% -provisioning-profile %IOS_PROVISION_DEV%
+set IOS_DIST_SIGNING_OPTIONS=-hideAneLibSymbols no -useLegacyAOT yes -storetype pkcs12 -keystore "%IOS_DIST_CERT_FILE%" -provisioning-profile %IOS_PROVISION_DIST%
+set IOS_ADHOC_SIGNING_OPTIONS=-hideAneLibSymbols no -useLegacyAOT yes -storetype pkcs12 -keystore "%IOS_DIST_CERT_FILE%" -provisioning-profile %IOS_PROVISION_ADHOC%
 
 :: Application descriptor
 set APP_XML=application.xml

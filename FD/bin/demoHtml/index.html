@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Ali Tavakoli">
-	<script type="text/javascript" src="Bridge.js"></script>
 <title>Rich WebView ANE</title>
 
 <style>
@@ -143,10 +142,10 @@ window.onload = function() {
 </head>
 
 <body>
-	<h2>Rich WebView ANE V4.0 (iOS+Android)</h2>
+	<h2>Rich WebView ANE V5.0 (iOS+Android)</h2>
 	
 	<p>
-	<button type="button" onClick="Bridge.call('closeWebView()')">closeWebView</button>
+	<button type="button" onClick="AirBridge.evoke('closeWebView()')">closeWebView</button>
 	</p>
 	
 	<p>The WebView extension lets you create a web view port inside your AdobeAir mobile application and load content from a URL or an offline html file
@@ -177,9 +176,9 @@ window.onload = function() {
 	Well, possebilities are endless when you can send messages to flash and vice versa. you may do simple tasks like playing a sound or showing a toast but you
 	can also do complicated stuff like opening the camera, taking a picture and retrive the photo in your JS logic! I don't know, just use your imagination! As
 	a very simple test, I'm going to tell my flash app to play a sound by calling the following func from my html: <font color="#FF9900">toPlaySound()</font> 
-	<a href="javascript:void(0);" onclick="Bridge.call('toPlaySound()')" return false;>CLICK ME!</a> <b>make sure your device is not silenced to hear the sound</b>
+	<a href="javascript:void(0);" onclick="AirBridge.evoke('toPlaySound()')" return false;>CLICK ME!</a> <b>make sure your device is not silenced to hear the sound</b>
 	<br><br>
-	as another test, I'm going to send a message to flash and in return, flash will call JS to open an Alert window! <a href="javascript:void(0);" onclick="Bridge.call('toOpenJSAlert()')" return false;>
+	as another test, I'm going to send a message to flash and in return, flash will call JS to open an Alert window! <a href="javascript:void(0);" onclick="AirBridge.evoke('toOpenJSAlert()')" return false;>
 	CLICK HERE.</a>
 	</p>
 	
@@ -188,20 +187,20 @@ window.onload = function() {
 	Being able to resize and position your webView is very important because with that you will be able to put the web view anywhere inside your app design
 	in case you don't want to open it in fullscreen like this sample! you can easily change the position and dimension of your view from flash... try the
 	following buttons to test the resizing option...
-	<button type="button" onClick="Bridge.call('changePosition(50,100,100,200)')">changePosition</button>
-	<button type="button" onClick="Bridge.call('changePosition(0,0,0,0)')">fullscreen</button>
+	<button type="button" onClick="AirBridge.evoke('changePosition(50,100,100,200)')">changePosition</button>
+	<button type="button" onClick="AirBridge.evoke('changePosition(0,0,0,0)')">fullscreen</button>
 	</p>
 	
 	<p>
 	<h4>Control the scroll position</h4>
 	html and JS is able to control the scrolling of a web page but you will have more options if you use the ANE methods like:
 	<ul>
-		<li><a href="javascript:void(0);" onclick="Bridge.call('pageDown(false)')" return false;>_ex.pageDown(false);</a></li>
-		<li><a href="javascript:void(0);" onclick="Bridge.call('pageDown(false)')" return false;>_ex.pageDown(true);</a></li>
-		<li><a href="javascript:void(0);" onclick="Bridge.call('pageUp(false)')" return false;>_ex.pageUp(false);</a></li>
-		<li><a href="javascript:void(0);" onclick="Bridge.call('pageUp(true)')" return false;>_ex.pageUp(true);</a></li>
-		<li><a href="javascript:void(0);" onclick="Bridge.call('zoomIn()')" return false;>_ex.zoomIn();</a></li>
-		<li><a href="javascript:void(0);" onclick="Bridge.call('zoomOut()')" return false;>_ex.zoomOut();</a></li>
+		<li><a href="javascript:void(0);" onclick="AirBridge.evoke('pageDown(false)')" return false;>_ex.pageDown(false);</a></li>
+		<li><a href="javascript:void(0);" onclick="AirBridge.evoke('pageDown(false)')" return false;>_ex.pageDown(true);</a></li>
+		<li><a href="javascript:void(0);" onclick="AirBridge.evoke('pageUp(false)')" return false;>_ex.pageUp(false);</a></li>
+		<li><a href="javascript:void(0);" onclick="AirBridge.evoke('pageUp(true)')" return false;>_ex.pageUp(true);</a></li>
+		<li><a href="javascript:void(0);" onclick="AirBridge.evoke('zoomIn()')" return false;>_ex.zoomIn();</a></li>
+		<li><a href="javascript:void(0);" onclick="AirBridge.evoke('zoomOut()')" return false;>_ex.zoomOut();</a></li>
 		<li>_ex.filingScroll(0, 200);</li>
 		<li>_ex.scrollBy(0, -200);</li>
 		<li>_ex.scrollTo(_ex.scrollX, (_ex.scrollY + 200));</li>
@@ -211,10 +210,10 @@ window.onload = function() {
 	<p>
 	<h4>Take Bitmap screenshots</h4>
 	if you need screenshots to be taken from your webview page, all you have to do is to call _ex.requestBitmap();
-	<button type="button" onClick="Bridge.call('toTakeScreenshot()')">test the screenshot!</button>
+	<button type="button" onClick="AirBridge.evoke('toTakeScreenshot()')">test the screenshot!</button>
 	</p>
 
-	<!--uncomment the video tag to see how it works but becareful with it because older Android devices do not support HTML5 video fully-->
+	<!-- add movie01.mp4 and image.jpg then uncomment the video tag to see how it works but becareful with it because older Android devices do not support HTML5 video fully -->
 	<!--<p>
 	<h4>Play video clips inline</h4>
 	<video width="300" controls poster="image.jpg">

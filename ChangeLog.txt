@@ -17,3 +17,10 @@ Oct 11, 2015	>> V4.0: 	Added support for user zoom pinch
 
 Nov 03, 2015	>> V4.9:	doitflash devs merged into MyFLashLab Team.
 Dec 20, 2015 	>> V4.9.1: 	minor bug fixes
+
+Jan 03, 2015	>> V5.0:	added support for loading local html files from File.applicationStorageDirectory too.
+				the bridge javascript code will now be injected into html pages automatically from the extension so you don't have to add the js file to your html content anymore.
+				When using RichWebview ANE, there is a "AirBridge.js" file on the root next to the main Air .swf file and you should NOT move or rename this file because native side is using this file to inject js functions into loaded html pages.
+				You may use this js file to add your own js functions to inject along with our current code which is necesary for the ANE to function correctly.
+				From this version, you must call AirBridge.evoke() method to call functions on the Air side. so make sure you have studied and tested the extension fully before adding it into your projects which is using older versions of this extension.
+

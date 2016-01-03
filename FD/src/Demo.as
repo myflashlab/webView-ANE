@@ -154,8 +154,9 @@ package
 		
 		private function init():void
 		{
-			var src:File = File.applicationDirectory.resolvePath("webviewV4.0");
-			var dis:File = File.documentsDirectory.resolvePath("webviewV4.0");
+			var src:File = File.applicationDirectory.resolvePath("demoHtml");
+			//var dis:File = File.documentsDirectory.resolvePath("demoHtml");
+			var dis:File = File.applicationStorageDirectory.resolvePath("demoHtml");
 			if (dis.exists) dis.deleteDirectory(true);
 			if (!dis.exists) src.copyTo(dis, true);
 			
@@ -179,7 +180,8 @@ package
 			
 			function openWebViewLocal(e:MouseEvent):void
 			{
-				_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.documentsDirectory.resolvePath("webviewV4.0/index.html"));
+				//_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.documentsDirectory.resolvePath("demoHtml/index.html"));
+				_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.applicationStorageDirectory.resolvePath("demoHtml/index.html"));
 				//_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://www.google.com");
 			}
 		}
