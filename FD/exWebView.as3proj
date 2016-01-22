@@ -12,7 +12,7 @@
     <movie minorVersion="0" />
     <movie platform="AIR Mobile" />
     <movie background="#FFFFFF" />
-    <movie preferredSDK="Flex 4.6.0, AIR 19.0;4.6.0, 19.0;" />
+    <movie preferredSDK="Flex 4.6.0, AIR 20.0;4.6.0, 20.0;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -43,7 +43,7 @@
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />
-    <option additional="-swf-version=30" />
+    <option additional="-swf-version=31" />
     <option compilerConstants="" />
     <option minorVersion="" />
   </build>

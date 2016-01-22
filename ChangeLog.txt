@@ -24,3 +24,8 @@ Jan 03, 2015	>> V5.0:	added support for loading local html files from File.appli
 				You may use this js file to add your own js functions to inject along with our current code which is necesary for the ANE to function correctly.
 				From this version, you must call AirBridge.evoke() method to call functions on the Air side. so make sure you have studied and tested the extension fully before adding it into your projects which is using older versions of this extension.
 
+Jan 20, 2016 	>> V5.1: 	bypassing xCode 7.2 bug causing iOS conflict when compiling with AirSDK 20 without waiting on Adobe or Apple to fix the problem.
+							This is a must have upgrade for your app to make sure you can compile multiple ANEs in your project with AirSDK 20 or greater.
+							https://forums.adobe.com/thread/2055508
+							https://forums.adobe.com/message/8294948
+							updated com.doitflash.tools.DynamicFunc

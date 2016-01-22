@@ -44,7 +44,7 @@
 		
 		public static const OBJECT_PATTERN:RegExp = /[\w_!.@\$\?%]+:[\w_!.@\$\?%\s\/\[\]]+/g;
 		public static const STRING_PATTERN_FOR_OBJECT:RegExp = /[\w_!.@\$\?%\s\/\[\]]+/g;
-		public static const STRING_PATTERN:RegExp = /[\w_!:.@\$\?%\s\/\(\)]+/g;
+		public static const STRING_PATTERN:RegExp = /[\w_!:.@\$\?%\s\/\(\)'-]+/g;
 		
 		/**
 		 * initialize the class and send your <code>string</code> to be converted to a function call.
@@ -143,7 +143,7 @@
 			var inputs:Array = [];
 			
 			var funcPattern:RegExp = /[\w_]+/;
-			var valuePattern:RegExp = /\[?\{?((([\w_!.@\$\?%]+):?([\w_!.@\$\?%\s\/]+)?),?\s?)+\}?\]?/g;
+			var valuePattern:RegExp = /\[?\{?((([\w_!.@\$\?%]+):?([\w_!.@\$\?%\s\/'-]+)?),?\s?)+\}?\]?/g;
 			
 			// save the function name in string
 			var funcName:String = $stringFunc.match(funcPattern)[0];

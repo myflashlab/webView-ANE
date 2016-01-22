@@ -213,6 +213,8 @@ package
 		private function onReceivedMassage(e:RichWebViewEvent):void
 		{
 			C.log("onReceivedMassage: ", e.param);
+			trace("onReceivedMassage: ", e.param);
+			
 			DynamicFunc.run(this, e.param);
 		}
 		
@@ -302,6 +304,11 @@ package
 		public function toTakeScreenshot():void
 		{
 			_ex.requestBitmap();
+		}
+		
+		public function parseJson($str:String):void
+		{
+			trace(decodeURIComponent($str));
 		}
 	
 // ------------------------------------------------------------------------------------------------------------

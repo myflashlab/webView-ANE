@@ -1,4 +1,4 @@
-# Rich WebView ANE V5.0 (Android+iOS)
+# Rich WebView ANE V5.1 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 checkout here for the commercial version: http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
@@ -137,6 +137,8 @@ This extension works on Android SDK 10 or higher and iOS 6.1 or higher (lower An
   - When using RichWebview ANE, there is a "AirBridge.js" file on the root next to the main Air .swf file and you should NOT move or rename this file because native side is using this file to inject js functions into loaded html pages.
   - You may use this js file to add your own js functions to inject along with our current code which is necesary for the ANE to function correctly.
   - From this version, you must call AirBridge.evoke() method to call functions on the Air side. so make sure you have studied and tested the extension fully before adding it into your projects which is using older versions of this extension.
-  
-# NOTICES
-If you are receiving error message ```Compilation failed while executing : ld64``` Please read this disscussion https://forums.adobe.com/thread/2055508 Adobe is aware of this problem and they are working on it to fix it.
+- Jan 20, 2016 	>> V5.1: 	bypassing xCode 7.2 bug causing iOS conflict when compiling with AirSDK 20 without waiting on Adobe or Apple to fix the problem.
+  - This is a must have upgrade for your app to make sure you can compile multiple ANEs in your project with AirSDK 20 or greater.
+  - https://forums.adobe.com/thread/2055508
+  - https://forums.adobe.com/message/8294948
+  - updated com.doitflash.tools.DynamicFunc

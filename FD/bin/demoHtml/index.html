@@ -75,6 +75,29 @@ function getUserLocation()
 	navigator.geolocation.getCurrentPosition(onGpsSuccess, onGpsError, gpsOptions);
 }
 
+function sendComplexDataToAir()
+{
+	var myJSONObject = 
+	{
+		"someData": 
+		[
+			{"var1": "value 1"},
+			{"var2": "value 2"},
+			{"var3": "value 3"},
+			{"var3": "As long as you have a valid Json in JS, you can have it received on the Air side with no problem!"}
+		]
+	};
+	
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify	
+	var jsonStr = JSON.stringify(myJSONObject);
+	
+	// http://www.w3schools.com/jsref/jsref_encodeURI.asp
+	var encodedStr = encodeURIComponent(jsonStr);
+	
+	// and finally send it to flash
+	AirBridge.evoke('parseJson('+ encodedStr +')');
+}
+
 // ----------------------------------------------------------------------------- File picker funcs
 // demo code for choosing a file
 window.onload = function() {
@@ -142,7 +165,7 @@ window.onload = function() {
 </head>
 
 <body>
-	<h2>Rich WebView ANE V5.0 (iOS+Android)</h2>
+	<h2>Rich WebView ANE V5.1 (iOS+Android)</h2>
 	
 	<p>
 	<button type="button" onClick="AirBridge.evoke('closeWebView()')">closeWebView</button>
@@ -180,6 +203,14 @@ window.onload = function() {
 	<br><br>
 	as another test, I'm going to send a message to flash and in return, flash will call JS to open an Alert window! <a href="javascript:void(0);" onclick="AirBridge.evoke('toOpenJSAlert()')" return false;>
 	CLICK HERE.</a>
+	</p>
+	
+	<p>
+	<h4>Sending complex data from JS to Flash</h4>
+	There are times that you may wish to send a lot of information from JS to the Air side. The best approach is to create a JSON string in JS, encodeURIComponent it and
+	then send to the other side. (In this example, check your debugger trace log to see the JS Json string is delivered to the Air side as soon as you hit the dollowing
+	button.
+	<button type="button" onClick="sendComplexDataToAir()">Send Complex Data To Air</button>
 	</p>
 	
 	<p>
