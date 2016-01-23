@@ -22,6 +22,7 @@ you may like to see the ANE in action? check this out: https://github.com/myflas
 Tutorials:
 * [How to enable GPS in Rich Webview ANE?](http://www.myflashlabs.com/adobe-air-stagewebview-gps/)
 * [How to Open file picker on the input html fields?](http://www.myflashlabs.com/adobe-air-html-file-pick-webview/)
+* [How to open/parse pdf using RichWebview ANE?](http://www.myflashlabs.com/how-to-open-parse-pdf-using-richwebview-ane/)
 
 # AS3 API:
 ```actionscript
