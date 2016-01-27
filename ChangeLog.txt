@@ -1,31 +1,42 @@
 Rich WebView Adobe Air Native Extension
 
+*Jan 20, 2016 - V5.1*
+* bypassing xCode 7.2 bug causing iOS conflict when compiling with AirSDK 20 without waiting on Adobe or Apple to fix the problem. This is a must have upgrade for your app to make sure you can compile multiple ANEs in your project with AirSDK 20 or greater. https://forums.adobe.com/thread/2055508 https://forums.adobe.com/message/8294948
 
-Jun 16, 2015	>> V1.0: 	beginning of the journey!
 
-Jul 21, 2015	>> V2.0: 	Added bitmap screenshot
-				support inline HTML5 video tag
+*Jan 03, 2015 - V5.0*
+* added support for loading local html files from File.applicationStorageDirectory too
+* the bridge javascript code will now be injected into html pages automatically from the extension so you don't have to add the js file to your html content anymore
+* When using RichWebview ANE, there is a "AirBridge.js" file on the root next to the main Air .swf file and you should NOT move or rename this file because native side is using this file to inject js functions into loaded html pages
+* You may use this js file to add your own js functions to inject along with our current code which is necesary for the ANE to function correctly
+* From this version, you must call AirBridge.evoke() method to call functions on the Air side. so make sure you have studied and tested the extension fully before adding it into your projects which is using older versions of this extension
 
-Aug 17, 2015	>> V3.0: 	Added inputfile picker support
-				Added Gps support
-				fixed minor bugs
 
-Oct 11, 2015	>> V4.0: 	Added support for user zoom pinch
-				updated load methods to be able to load new pages without the need to dispose the webview at first. This improves user expirience a lot.
-				depricated 'setPosition' for the favor of the new method 'setViewPort'
-				added x, y, width and height properties to the extension so it can be a lot easier to manage its dimension on the stage
+*Dec 20, 2015 - V4.9.1*
+* minor bug fixes
 
-Nov 03, 2015	>> V4.9:	doitflash devs merged into MyFLashLab Team.
-Dec 20, 2015 	>> V4.9.1: 	minor bug fixes
 
-Jan 03, 2015	>> V5.0:	added support for loading local html files from File.applicationStorageDirectory too.
-				the bridge javascript code will now be injected into html pages automatically from the extension so you don't have to add the js file to your html content anymore.
-				When using RichWebview ANE, there is a "AirBridge.js" file on the root next to the main Air .swf file and you should NOT move or rename this file because native side is using this file to inject js functions into loaded html pages.
-				You may use this js file to add your own js functions to inject along with our current code which is necesary for the ANE to function correctly.
-				From this version, you must call AirBridge.evoke() method to call functions on the Air side. so make sure you have studied and tested the extension fully before adding it into your projects which is using older versions of this extension.
+*Nov 03, 2015 - V4.9*
+* doitflash devs merged into MyFLashLab Team
 
-Jan 20, 2016 	>> V5.1: 	bypassing xCode 7.2 bug causing iOS conflict when compiling with AirSDK 20 without waiting on Adobe or Apple to fix the problem.
-							This is a must have upgrade for your app to make sure you can compile multiple ANEs in your project with AirSDK 20 or greater.
-							https://forums.adobe.com/thread/2055508
-							https://forums.adobe.com/message/8294948
-							updated com.doitflash.tools.DynamicFunc
+
+*Oct 11, 2015 - V4.0*
+* Added support for user zoom pinch
+* updated load methods to be able to load new pages without the need to dispose the webview at first. This improves user expirience a lot
+* depricated 'setPosition' in favor of the new method 'setViewPort'
+* added x, y, width and height properties to the extension so it can be a lot easier to manage its dimension on the stage
+
+
+*Aug 17, 2015 - V3.0*
+* Added inputfile picker support
+* Added Gps support
+* fixed minor bugs
+
+
+*Jul 21, 2015 - V2.0*
+* Added bitmap screenshot
+* support inline HTML5 video tag
+
+
+*Jun 16, 2015 - V1.0*
+* beginning of the journey!
