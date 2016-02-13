@@ -10,22 +10,25 @@
 /*
 	Android does not support fullscreen videos in HTML so, with the following css we are
 	removing the fullscreen button from Android
-*/
+	
+	If you are using iFrame videos like vimeo or YouTube, you don't need to set this block at all, anyway.
 
-video::-webkit-media-controls-fullscreen-button {
-    display: none;
-}
-video::-webkit-media-controls-play-button {
-   background: red; 
-}
-video::-webkit-media-controls-play-button {}
-video::-webkit-media-controls-timeline {}
-video::-webkit-media-controls-current-time-display{}
-video::-webkit-media-controls-time-remaining-display {}
-video::-webkit-media-controls-time-remaining-display {}
-video::-webkit-media-controls-mute-button {}
-video::-webkit-media-controls-toggle-closed-captions-button {}
-video::-webkit-media-controls-volume-slider {}
+	video::-webkit-media-controls-fullscreen-button {
+		display: none;
+	}
+	video::-webkit-media-controls-play-button {
+	   background: red; 
+	}
+	video::-webkit-media-controls-play-button {}
+	video::-webkit-media-controls-timeline {}
+	video::-webkit-media-controls-current-time-display{}
+	video::-webkit-media-controls-time-remaining-display {}
+	video::-webkit-media-controls-time-remaining-display {}
+	video::-webkit-media-controls-mute-button {}
+	video::-webkit-media-controls-toggle-closed-captions-button {}
+	video::-webkit-media-controls-volume-slider {}
+	
+*/
 
 .hiddenFileInput {
     width: 0;
@@ -41,6 +44,7 @@ img {
     max-height: 60%;
     margin-bottom: 8px;
 }
+
 </style>
 
 <script>
@@ -100,7 +104,8 @@ function sendComplexDataToAir()
 
 // ----------------------------------------------------------------------------- File picker funcs
 // demo code for choosing a file
-window.onload = function() {
+window.onload = function() 
+{
     console.log('window.onload');
     var loadFileBtn = document.querySelector('.loadFileBtn');
     var fileInputField = document.querySelector('.hiddenFileInput');
@@ -154,9 +159,32 @@ window.onload = function() {
 			alert("error = file not found");
 		}
     });
+	
+	onPageLoaded();
 };
 
 // -----------------------------------------------------------------------------
+
+function onPageLoaded()
+{
+	setTimeout(checkNow, 1000);
+	
+	function checkNow()
+	{
+		if(typeof airBridge === 'undefined')
+		{
+			alert("You are NOT running this page in RichWebview ANE!");
+		}
+		else
+		{
+			alert("you are running this ANE on " + airBridge.OS);
+		}
+		
+	}
+}
+
+// -----------------------------------------------------------------------------
+
 
 </script>
 
@@ -165,7 +193,7 @@ window.onload = function() {
 </head>
 
 <body>
-	<h2>Rich WebView ANE V5.1 (iOS+Android)</h2>
+	<h2>Rich WebView ANE V6.0.0 (iOS+Android)</h2>
 	
 	<p>
 	<button type="button" onClick="AirBridge.evoke('closeWebView()')">closeWebView</button>
@@ -184,10 +212,11 @@ window.onload = function() {
 		<li>Navigate back and forth through pages</li>
 		<li>Control the Scroll position</li>
 		<li>Change the view port size and position at runtime</li>
-		<li>Play video files inside the webview</li>
+		<li>Play video files inside the webview including embedded iFrame videos</li>
 		<li>Take full screenshots from your webview object</li>
 		<li>get GPS location information in to your JS</li>
 		<li>enable file picker dialog on your HTML input fields</li>
+		<li>Choose on the background color of your webview or make it transparent</li>
 		<li>And of course you can do whatever HTML allowes you to do!</li>
 	</ul>
 	
@@ -243,15 +272,6 @@ window.onload = function() {
 	if you need screenshots to be taken from your webview page, all you have to do is to call _ex.requestBitmap();
 	<button type="button" onClick="AirBridge.evoke('toTakeScreenshot()')">test the screenshot!</button>
 	</p>
-
-	<!-- add movie01.mp4 and image.jpg then uncomment the video tag to see how it works but becareful with it because older Android devices do not support HTML5 video fully -->
-	<!--<p>
-	<h4>Play video clips inline</h4>
-	<video width="300" controls poster="image.jpg">
-	<source src="movie01.mp4" type="video/mp4">
-	  Your browser does not support HTML5 video.
-	</video>
-	</p>-->
 	
 	<p>
 	<h4>get Gps information from browser</h4>
@@ -269,6 +289,75 @@ window.onload = function() {
 	<img src="" />
 	
 	</p>
+	
+	
+	<p>
+		
+		<!--
+				Check out these links for more reference. depending on the OS, these input types
+				may work differently but you will get the idea with these samples. for more details
+				you need to study webView differences in Android and iOS and write your js/html code
+				accordingly.
+				
+				http://www.w3schools.com/tags/att_input_type.asp
+				http://www.w3schools.com/html/html_form_attributes.asp
+		-->
+		<h4>Other Input Field types</h4>
+		You can also decide what keyboard type you'd like to open based on different input textfields. here are some examples:
+		
+		tel:<input type="tel" value="">
+		<br><br>
+		
+		url:<input type="url" value="">
+		<br><br>
+		
+		email:<input type="email" value="">
+		<br><br>
+		
+		password:<input type="password" value="">
+		<br><br>
+		
+		range:<input type="range" value="">
+		<br><br>
+		
+		time:<input type="time" value="">
+		<br><br>
+		
+		datetime-local:<input type="datetime-local" value="">
+		<br><br>
+		
+		month:<input type="month" value="">
+		<br><br>
+		
+		radio: <input type="radio" value="">
+		<br><br>
+		
+		checkbox: <input type="checkbox" value="">
+		<br><br>
+		
+		You may also set a patter.
+		<br/>
+		
+		text(pattern: \d*):<br>
+		<input type="text" pattern="\d*" value="">
+	
+	</p>
+	<!-- add movie01.mp4 and image.jpg then uncomment the video tag to see how it works but becareful with it because older Android devices do not support HTML5 video fully -->
+	<!--<p>
+	<h4>Play video clips inline</h4>
+	<video width="300" controls poster="image.jpg">
+	<source src="movie01.mp4" type="video/mp4">
+	  Your browser does not support HTML5 video.
+	</video>
+	</p>-->
+	
+	<!-- NOTICE: When you use iFrame, your page will take longer to be completly loaded and this means that the AirBridge will be initialized later. -->
+	<!--<p>
+		
+		<h4>Embeding videos couldn't be easier than this!</h4>
+		<iframe src="https://player.vimeo.com/video/152790766" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+		
+	</p>-->
 	
 	
 </body>

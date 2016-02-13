@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/20.0">
   <id>com.doitflash.exWebView</id>
-  <versionNumber>5.1</versionNumber>
+  <versionNumber>6.0.0</versionNumber>
   <supportedProfiles>mobileDevice</supportedProfiles>
   <filename>exWebView</filename>
   <name>Rich Webview</name>

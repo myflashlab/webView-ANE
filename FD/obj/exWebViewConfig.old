@@ -8,15 +8,15 @@
   <compiler>
     <define append="true">
       <name>CONFIG::debug</name>
-      <value>true</value>
-    </define>
-    <define append="true">
-      <name>CONFIG::release</name>
       <value>false</value>
     </define>
     <define append="true">
+      <name>CONFIG::release</name>
+      <value>true</value>
+    </define>
+    <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'1/17/2016'</value>
+      <value>'2/13/2016'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -30,18 +30,20 @@
       <name>CONFIG::desktop</name>
       <value>false</value>
     </define>
-    <verbose-stacktraces>true</verbose-stacktraces>
+    <optimize>true</optimize>
+    <omit-trace-statements>true</omit-trace-statements>
+    <verbose-stacktraces>false</verbose-stacktraces>
     <source-path append="true">
-      <path-element>E:\project\products\MyFlashLab_ANEs\webView\V5.0\FD\src</path-element>
+      <path-element>E:\project\products\MyFlashLab_ANEs\webView\V5.2\FD\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
-      <path-element>E:\project\products\MyFlashLab_ANEs\webView\V5.0\FD\lib\greensock.swc</path-element>
-      <path-element>E:\project\products\MyFlashLab_ANEs\webView\V5.0\FD\lib\richWebView.ane</path-element>
+      <path-element>E:\project\products\MyFlashLab_ANEs\webView\V5.2\FD\lib\greensock.swc</path-element>
+      <path-element>E:\project\products\MyFlashLab_ANEs\webView\V5.2\FD\lib\richWebView.ane</path-element>
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>E:\project\products\MyFlashLab_ANEs\webView\V5.0\FD\src\Demo.as</path-element>
+    <path-element>E:\project\products\MyFlashLab_ANEs\webView\V5.2\FD\src\Demo.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>

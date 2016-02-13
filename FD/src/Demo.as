@@ -2,6 +2,7 @@ package
 {
 	import com.myflashlab.air.extensions.webView.RichWebView;
 	import com.myflashlab.air.extensions.webView.RichWebViewEvent;
+	import com.myflashlab.air.extensions.webView.RichWebViewSettings;
 	import com.doitflash.consts.Direction;
 	import com.doitflash.consts.Orientation;
 	import com.doitflash.mobileProject.commonCpuSrc.DeviceInfo;
@@ -161,18 +162,26 @@ package
 			if (!dis.exists) src.copyTo(dis, true);
 			
 			// required only if you are a member of the club
-			RichWebView.clubId = "paypal-address-you-used-to-join-the-club"; 
+			RichWebView.clubId = "paypal-email-address-you-used-while-joining-the-club";
 			
 			// make sure stage is not null when you're initializing RichWebView
-			_ex = new RichWebView(this.stage, true, true, true, true); // stage, enableBitmapCapture, enableCookies, enableGps, enableZoom
+			_ex = new RichWebView(this.stage);
 			if(_ex.os == RichWebView.ANDROID) C.log("Android SDK version: ", _ex.sdkVersion);
 			_ex.addEventListener(RichWebViewEvent.BACK_CLICKED, onBackClicked);
 			_ex.addEventListener(RichWebViewEvent.PAGE_STARTED, onPageStarted);
 			_ex.addEventListener(RichWebViewEvent.PAGE_PROGRESS, onPageProgress);
 			_ex.addEventListener(RichWebViewEvent.PAGE_FINISHED, onPageFinished);
-			_ex.addEventListener(RichWebViewEvent.RECEIVED_MASSAGE_FROM_JS, onReceivedMassage);
+			_ex.addEventListener(RichWebViewEvent.RECEIVED_MESSAGE_FROM_JS, onReceivedMessage);
 			_ex.addEventListener(RichWebViewEvent.RECEIVED_SSL_ERROR, onReceivedError);
 			_ex.addEventListener(RichWebViewEvent.SCREENSHOT, onScreenshot);
+			
+			// set optional RichWebview settings (apply these settings AFTER initializing the ANE and BEFORE opening a webpage)
+			RichWebViewSettings.ENABLE_BITMAP_CAPTURE = true;
+			RichWebViewSettings.ENABLE_COOKIES = true;
+			RichWebViewSettings.ENABLE_GPS = true;
+			RichWebViewSettings.ENABLE_ZOOM = true;
+			RichWebViewSettings.ENABLE_SCROLL_BOUNCE = false;
+			RichWebViewSettings.BG_COLOR_HEX = "#FFFFFFFF"; // AARRGGBB
 			
 			var btn1:MySprite = createBtn("openWebView");
 			btn1.addEventListener(MouseEvent.CLICK, openWebViewLocal);
@@ -182,12 +191,20 @@ package
 			{
 				//_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.documentsDirectory.resolvePath("demoHtml/index.html"));
 				_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.applicationStorageDirectory.resolvePath("demoHtml/index.html"));
-				//_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://www.google.com");
+				//_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://google.com/");
+				
+				// opening a pdf in iOS is very straight forward like this:
+				//_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://www.myflashlabs.com/showcase/test.pdf");
+				
+				// but Android cannot open pdf files but yet, you can use google proxy to open it like this:
+				//_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://docs.google.com/gview?embedded=true&url=http://www.myflashlabs.com/showcase/test.pdf");
 			}
+			
 		}
 		
 		private function onBackClicked(e:RichWebViewEvent):void
 		{
+			C.log("onBackClicked")
 			if (_ex.canGoBack) _ex.goBack();
 			else _ex.closeWebView();
 		}
@@ -210,10 +227,10 @@ package
 			trace("onPageProgress progress: ", e.param);
 		}
 		
-		private function onReceivedMassage(e:RichWebViewEvent):void
+		private function onReceivedMessage(e:RichWebViewEvent):void
 		{
-			C.log("onReceivedMassage: ", e.param);
-			trace("onReceivedMassage: ", e.param);
+			C.log("onReceivedMessage: ", e.param);
+			trace("onReceivedMessage: ", e.param);
 			
 			DynamicFunc.run(this, e.param);
 		}

@@ -1,14 +1,15 @@
-# Rich WebView ANE V5.1 (Android+iOS)
+# Rich WebView ANE V6.0.0 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 **Main Features:**
 * Call JS funcs from Air and vice versa
 * Control the Scroll position
 * Change the view port size and position at runtime
-* Play video files inside the webview
+* Play video files inside the webview including embedded iFrame videos
 * Take full screenshots from your webview object
 * Get GPS location information in to your JS
 * Enable file picker dialog on your HTML input fields
+* Choose on the background color of your webview or make it transparent
 * change viewport and position of webview at runtime
 
 # Demo .apk
@@ -21,8 +22,9 @@ you may like to see the ANE in action? [Download demo .apk](https://github.com/m
 ```actionscript
 import com.myflashlab.air.extensions.webView.RichWebView;
 import com.myflashlab.air.extensions.webView.RichWebViewEvent;
+import com.myflashlab.air.extensions.webView.RichWebViewSettings;
 
-var _ex = new RichWebView(this.stage, true, true, true, true); // stage, enableBitmapCapture, enableCookies, enableGps, enableZoom
+var _ex = new RichWebView(this.stage);
 
 // add listeners
 if(_ex.os == RichWebView.ANDROID) C.log("Android SDK version: ", _ex.sdkVersion);
@@ -30,9 +32,17 @@ _ex.addEventListener(RichWebViewEvent.BACK_CLICKED, onBackClicked);
 _ex.addEventListener(RichWebViewEvent.PAGE_STARTED, onPageStarted);
 _ex.addEventListener(RichWebViewEvent.PAGE_PROGRESS, onPageProgress);
 _ex.addEventListener(RichWebViewEvent.PAGE_FINISHED, onPageFinished);
-_ex.addEventListener(RichWebViewEvent.RECEIVED_MASSAGE_FROM_JS, onReceivedMassage);
+_ex.addEventListener(RichWebViewEvent.RECEIVED_MESSAGE_FROM_JS, onReceivedMessage);
 _ex.addEventListener(RichWebViewEvent.RECEIVED_SSL_ERROR, onReceivedError);
 _ex.addEventListener(RichWebViewEvent.SCREENSHOT, onScreenshot);
+
+// set optional RichWebview settings (apply these settings AFTER initializing the ANE and BEFORE opening a webpage)
+RichWebViewSettings.ENABLE_BITMAP_CAPTURE = true;
+RichWebViewSettings.ENABLE_COOKIES = true;
+RichWebViewSettings.ENABLE_GPS = true;
+RichWebViewSettings.ENABLE_ZOOM = true;
+RichWebViewSettings.ENABLE_SCROLL_BOUNCE = false;
+RichWebViewSettings.BG_COLOR_HEX = "#FFFFFFFF"; // AARRGGBB
 
 _ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.documentsDirectory.resolvePath("webview/index.html")); // OR from File.applicationStorageDirectory
 //_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://www.google.com");
@@ -63,9 +73,9 @@ function onReceivedError(e:RichWebViewEvent):void
 	trace("error = " + e.param);
 }
 
-function onReceivedMassage(e:RichWebViewEvent):void
+function onReceivedMessage(e:RichWebViewEvent):void
 {
-	trace("onReceivedMassage: ", e.param);
+	trace("onReceivedMessage: ", e.param);
 }
 
 function onScreenshot(e:RichWebViewEvent):void
@@ -122,6 +132,16 @@ http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 [How to open/parse pdf using RichWebview ANE?](http://www.myflashlabs.com/how-to-open-parse-pdf-using-richwebview-ane/)  
 
 # Changelog
+*Feb 13, 2016 - V6.0.0*
+* Supporting iFrame embeded videos
+* removed AirBridge.js altogether! you won't see it anymore but it's there and will be injected into any html page that will be loaded. This will be a huge help to you to keep things as clean as possible.
+* corrected misspelling of the ```RECEIVED_MESSAGE_FROM_JS``` listener
+* introduced ```RichWebViewSettings``` class where you can set different options for your WebView on how it performs. As a result, you don't have to set the settings when initializing the extension in the constructor. instead you can set settings from the RichWebViewSettings class. old settings like gps and screenshots are there plus some new settings.
+* Added a cool feature to RichWebViewSettings is ```BG_COLOR_HEX``` which supports alpha channel too. for example this means a complete white bg ```RichWebViewSettings.BG_COLOR_HEX = "#FFFFFFFF";``` while the following means a transparent bg ```RichWebViewSettings.BG_COLOR_HEX = "#00FFFFFF";```
+* set keyboardDisplayRequiresUserAction on iOS to NO by default.
+* added ```hide()``` method and ```visible``` property to make the webview in/visible easily and fast
+
+
 *Jan 20, 2016 - V5.1*
 * bypassing xCode 7.2 bug causing iOS conflict when compiling with AirSDK 20 without waiting on Adobe or Apple to fix the problem. This is a must have upgrade for your app to make sure you can compile multiple ANEs in your project with AirSDK 20 or greater. https://forums.adobe.com/thread/2055508 https://forums.adobe.com/message/8294948
 

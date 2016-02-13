@@ -17,8 +17,8 @@ set AND_ICONS=icons/android
 set AND_SIGNING_OPTIONS=-storetype pkcs12 -keystore "%AND_CERT_FILE%" -storepass %AND_CERT_PASS%
 
 :: iOS packaging
-set IOS_DIST_CERT_FILE=cert\certificate_dis.p12
-set IOS_DEV_CERT_FILE=cert\certificate_dev.p12
+set IOS_DIST_CERT_FILE=cert\dis.p12
+set IOS_DEV_CERT_FILE=cert\dev.p12
 set IOS_DEV_CERT_PASS=pass
 set IOS_PROVISION_DEV=cert\comDoitflash.mobileprovision
 set IOS_PROVISION_DIST=cert\AdHocDoitflash.mobileprovision

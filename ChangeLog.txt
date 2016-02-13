@@ -1,5 +1,15 @@
 Rich WebView Adobe Air Native Extension
 
+*Feb 13, 2016 - V6.0.0*
+* Supporting iFrame embeded videos
+* removed AirBridge.js altogether! you won't see it anymore but it's there and will be injected into any html page that will be loaded. This will be a huge help to you to keep things as clean as possible.
+* corrected misspelling of the ```RECEIVED_MESSAGE_FROM_JS``` listener
+* introduced ```RichWebViewSettings``` class where you can set different options for your WebView on how it performs. As a result, you don't have to set the settings when initializing the extension in the constructor. instead you can set settings from the RichWebViewSettings class. old settings like gps and screenshots are there plus some new settings.
+* Added a cool feature to RichWebViewSettings is ```BG_COLOR_HEX``` which supports alpha channel too. for example this means a complete white bg ```RichWebViewSettings.BG_COLOR_HEX = "#FFFFFFFF";``` while the following means a transparent bg ```RichWebViewSettings.BG_COLOR_HEX = "#00FFFFFF";```
+* set keyboardDisplayRequiresUserAction on iOS to NO by default.
+* added ```hide()``` method and ```visible``` property to make the webview in/visible easily and fast
+
+
 *Jan 20, 2016 - V5.1*
 * bypassing xCode 7.2 bug causing iOS conflict when compiling with AirSDK 20 without waiting on Adobe or Apple to fix the problem. This is a must have upgrade for your app to make sure you can compile multiple ANEs in your project with AirSDK 20 or greater. https://forums.adobe.com/thread/2055508 https://forums.adobe.com/message/8294948
 
