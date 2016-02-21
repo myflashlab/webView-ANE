@@ -1,4 +1,4 @@
-# Rich WebView ANE V6.0.0 (Android+iOS)
+# Rich WebView ANE V6.1.0 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 **Main Features:**
@@ -10,6 +10,7 @@ This extension is a perfect replacement to the classic StageWebView and it allow
 * Get GPS location information in to your JS
 * Enable file picker dialog on your HTML input fields
 * Choose on the background color of your webview or make it transparent
+* TouchEvent to know when the WebView is touched
 * change viewport and position of webview at runtime
 
 # Demo .apk
@@ -35,6 +36,7 @@ _ex.addEventListener(RichWebViewEvent.PAGE_FINISHED, onPageFinished);
 _ex.addEventListener(RichWebViewEvent.RECEIVED_MESSAGE_FROM_JS, onReceivedMessage);
 _ex.addEventListener(RichWebViewEvent.RECEIVED_SSL_ERROR, onReceivedError);
 _ex.addEventListener(RichWebViewEvent.SCREENSHOT, onScreenshot);
+_ex.addEventListener(RichWebViewEvent.TOUCH, onTouch);
 
 // set optional RichWebview settings (apply these settings AFTER initializing the ANE and BEFORE opening a webpage)
 RichWebViewSettings.ENABLE_BITMAP_CAPTURE = true;
@@ -82,6 +84,11 @@ function onScreenshot(e:RichWebViewEvent):void
 {
 	var bm:Bitmap = new Bitmap(e.param, "auto", true);
 	this.addChild(bm);
+}
+
+function onTouch(e:RichWebViewEvent):void
+{
+	trace("onTouch > " + "x = " + e.param.x + " y = " + e.param.y);
 }
 ```
 
@@ -132,6 +139,12 @@ http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 [How to open/parse pdf using RichWebview ANE?](http://www.myflashlabs.com/how-to-open-parse-pdf-using-richwebview-ane/)  
 
 # Changelog
+*Feb 21, 2016 - V6.1.0*
+* New property added to move the Android Task to background ```moveAndroidTaskToBack()```
+* New listener to know when RichWebView is touched ```RichWebViewEvent.TOUCH```
+* Fixed the setViewPort bug in iOS which used to scroll the content to the top of the page. that won't happen anymore just like the Android side
+* Fixed other minor bugs
+
 *Feb 13, 2016 - V6.0.0*
 * Supporting iFrame embeded videos
 * removed AirBridge.js altogether! you won't see it anymore but it's there and will be injected into any html page that will be loaded. This will be a huge help to you to keep things as clean as possible.

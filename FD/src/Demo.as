@@ -161,9 +161,6 @@ package
 			if (dis.exists) dis.deleteDirectory(true);
 			if (!dis.exists) src.copyTo(dis, true);
 			
-			// required only if you are a member of the club
-			RichWebView.clubId = "paypal-email-address-you-used-while-joining-the-club";
-			
 			// make sure stage is not null when you're initializing RichWebView
 			_ex = new RichWebView(this.stage);
 			if(_ex.os == RichWebView.ANDROID) C.log("Android SDK version: ", _ex.sdkVersion);
@@ -174,6 +171,7 @@ package
 			_ex.addEventListener(RichWebViewEvent.RECEIVED_MESSAGE_FROM_JS, onReceivedMessage);
 			_ex.addEventListener(RichWebViewEvent.RECEIVED_SSL_ERROR, onReceivedError);
 			_ex.addEventListener(RichWebViewEvent.SCREENSHOT, onScreenshot);
+			_ex.addEventListener(RichWebViewEvent.TOUCH, onTouch);
 			
 			// set optional RichWebview settings (apply these settings AFTER initializing the ANE and BEFORE opening a webpage)
 			RichWebViewSettings.ENABLE_BITMAP_CAPTURE = true;
@@ -198,6 +196,8 @@ package
 				
 				// but Android cannot open pdf files but yet, you can use google proxy to open it like this:
 				//_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://docs.google.com/gview?embedded=true&url=http://www.myflashlabs.com/showcase/test.pdf");
+				
+				// to open local PDF files, check here: http://www.myflashlabs.com/product/pdf-reader-ane-adobe-air-native-extension/
 			}
 			
 		}
@@ -262,6 +262,12 @@ package
 				bm.bitmapData.dispose();
 				bm = null;
 			}
+		}
+		
+		private function onTouch(e:RichWebViewEvent):void
+		{
+			trace("onTouch > " + "x = " + e.param.x + " y = " + e.param.y);
+			C.log("onTouch > " + "x = " + e.param.x + " y = " + e.param.y);
 		}
 		
 // --------------------------------------------------------------------------------- funcs to be called from JS
