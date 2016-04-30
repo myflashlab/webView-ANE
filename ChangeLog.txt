@@ -1,5 +1,11 @@
 Rich WebView Adobe Air Native Extension
 
+*April 30, 2016 - V6.2.0*
+* Fixed the problem of loading local pages on some Android devices like Nexus
+* Found a solution for the StageText listeners. check out https://github.com/myflashlab/webView-ANE/issues/61#issuecomment-215052184
+* Fixed the Bitmap screenshot problem on some Android devices
+* You can now set the browser UserAgent manually or leave it empty for the webview to use the default setting. (On Android devices, you need to set the useragent to *Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.36 (KHTML, like Gecko) Chrome/13.0.766.0 Safari/534.36* for YouTube or Vimeo players to work.)
+
 *Feb 21, 2016 - V6.1.0*
 * New property added to move the Android Task to background ```moveAndroidTaskToBack()```
 * New listener to know when RichWebView is touched ```RichWebViewEvent.TOUCH```

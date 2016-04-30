@@ -1,4 +1,4 @@
-# Rich WebView ANE V6.1.0 (Android+iOS)
+# Rich WebView ANE V6.2.0 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 **Main Features:**
@@ -45,6 +45,7 @@ RichWebViewSettings.ENABLE_GPS = true;
 RichWebViewSettings.ENABLE_ZOOM = true;
 RichWebViewSettings.ENABLE_SCROLL_BOUNCE = false;
 RichWebViewSettings.BG_COLOR_HEX = "#FFFFFFFF"; // AARRGGBB
+//RichWebViewSettings.USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.36 (KHTML, like Gecko) Chrome/13.0.766.0 Safari/534.36"; // useful when you are trying to load embedded YouTube or Vimeo videos
 
 _ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.documentsDirectory.resolvePath("webview/index.html")); // OR from File.applicationStorageDirectory
 //_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://www.google.com");
@@ -125,7 +126,7 @@ AirBridge.evoke("toVibrate");
 
 # Requirements
 * Android SDK 10 or higher (lower Android SDKs like Android 2.3.6 will not support HTML5 completly, so you must consider this fact in your HTML/JS logic)
-* iOS 6.1 or higher
+* iOS 8.0 or higher
 
 # Commercial Version
 http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
@@ -139,6 +140,12 @@ http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 [How to open/parse pdf using RichWebview ANE?](http://www.myflashlabs.com/how-to-open-parse-pdf-using-richwebview-ane/)  
 
 # Changelog
+*April 30, 2016 - V6.2.0*
+* Fixed the problem of loading local pages on some Android devices like Nexus
+* Found a solution for the StageText listeners. check out https://github.com/myflashlab/webView-ANE/issues/61#issuecomment-215052184
+* Fixed the Bitmap screenshot problem on some Android devices
+* You can now set the browser UserAgent manually or leave it empty for the webview to use the default setting. (On Android devices, you need to set the useragent to *Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.36 (KHTML, like Gecko) Chrome/13.0.766.0 Safari/534.36* for YouTube or Vimeo players to work.)
+
 *Feb 21, 2016 - V6.1.0*
 * New property added to move the Android Task to background ```moveAndroidTaskToBack()```
 * New listener to know when RichWebView is touched ```RichWebViewEvent.TOUCH```
