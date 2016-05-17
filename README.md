@@ -13,6 +13,9 @@ This extension is a perfect replacement to the classic StageWebView and it allow
 * TouchEvent to know when the WebView is touched
 * change viewport and position of webview at runtime
 
+# asdoc
+[find the latest asdoc for this ANE here.](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/webView/package-detail.html)
+
 # Demo .apk
 you may like to see the ANE in action? [Download demo .apk](https://github.com/myflashlab/webView-ANE/tree/master/FD/dist)
 
