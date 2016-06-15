@@ -99,8 +99,9 @@ package
 			_list.vDirection = Direction.TOP_TO_BOTTOM;
 			_list.space = BTN_SPACE;
 			
-			init();
-			onResize();
+			C.log("iOS is crazy with understanding stageWidth and stageHeight, you already now that :)");
+			C.log("So, we should wait a couple of seconds before initializing RichWebview to make sure the stage dimention is stable before passing it through the ANE.");
+			setTimeout(init, 2000);
 		}
 		
 		private function onInvoke(e:InvokeEvent):void
@@ -165,6 +166,7 @@ package
 			_ex = new RichWebView(this.stage);
 			if(_ex.os == RichWebView.ANDROID) C.log("Android SDK version: ", _ex.sdkVersion);
 			_ex.addEventListener(RichWebViewEvent.BACK_CLICKED, onBackClicked);
+			_ex.addEventListener(RichWebViewEvent.PAGE_STARTING, onPageStarting);
 			_ex.addEventListener(RichWebViewEvent.PAGE_STARTED, onPageStarted);
 			_ex.addEventListener(RichWebViewEvent.PAGE_PROGRESS, onPageProgress);
 			_ex.addEventListener(RichWebViewEvent.PAGE_FINISHED, onPageFinished);
@@ -201,6 +203,10 @@ package
 				// to open local PDF files, check here: http://www.myflashlabs.com/product/pdf-reader-ane-adobe-air-native-extension/
 			}
 			
+			
+			
+			
+			onResize();
 		}
 		
 		private function onBackClicked(e:RichWebViewEvent):void
@@ -208,6 +214,26 @@ package
 			C.log("onBackClicked")
 			if (_ex.canGoBack) _ex.goBack();
 			else _ex.closeWebView();
+		}
+		
+		private function onPageStarting(e:RichWebViewEvent):void
+		{
+			C.log("onPageStarting url = " + e.param);
+			trace("onPageStarting url = " + e.param);
+			
+			if (String(e.param).indexOf("mailto:") == 0)
+			{
+				_ex.callJS("diplayAlert('You have decided to let Air handle this type of links! > mailto:*****')");
+			}
+			else if (String(e.param).indexOf("tel:") == 0)
+			{
+				_ex.callJS("diplayAlert('You have decided to let Air handle this type of links! > tel:*****')");
+			}
+			else
+			{
+				// for any other link types, you have to call this method.
+				_ex.shouldContinueLoadingTheURL();
+			}
 		}
 		
 		private function onPageStarted(e:RichWebViewEvent):void

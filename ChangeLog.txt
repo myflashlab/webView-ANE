@@ -1,16 +1,40 @@
 Rich WebView Adobe Air Native Extension
 
-*April 30, 2016 - V6.2.0*
+*Jun 15, 2016 - V6.3.0*
+* Added support for ```setAllowUniversalAccessFromFileURLs``` on Android side. [asked here](https://github.com/myflashlab/webView-ANE/issues/93)
+* Fixed touch positions which was wrong on some iOS devices based on their DPI value. Now the returned x,y are corrected based on different devices DPI values. [asked here](https://github.com/myflashlab/webView-ANE/issues/96)
+* Introduced a new listener ```RichWebViewEvent.PAGE_STARTING``` which will notify you on the next URL which is about to load in webview. When you receive this event, you must decide if you wish the webview load the URL or you wish to handle it yourself. If you don't add the listener, the ANE will work like before BUT if you do add the listener, you MUST call ```_ex.shouldContinueLoadingTheURL();``` to allow the webview load links normally. This is shown in the sample code below.
+```actionscript
+_ex.addEventListener(RichWebViewEvent.PAGE_STARTING, onPageStarting);
+
+function onPageStarting(e:RichWebViewEvent):void
+{
+	if (String(e.param).indexOf("mailto:") == 0)
+	{
+		trace("do something with the mailto: links!");
+	}
+	else
+	{
+		// allow other link types to load normally
+		_ex.shouldContinueLoadingTheURL();
+	}
+}
+```
+
+
+*Apr 30, 2016 - V6.2.0*
 * Fixed the problem of loading local pages on some Android devices like Nexus
 * Found a solution for the StageText listeners. check out https://github.com/myflashlab/webView-ANE/issues/61#issuecomment-215052184
 * Fixed the Bitmap screenshot problem on some Android devices
 * You can now set the browser UserAgent manually or leave it empty for the webview to use the default setting. (On Android devices, you need to set the useragent to *Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.36 (KHTML, like Gecko) Chrome/13.0.766.0 Safari/534.36* for YouTube or Vimeo players to work.)
+
 
 *Feb 21, 2016 - V6.1.0*
 * New property added to move the Android Task to background ```moveAndroidTaskToBack()```
 * New listener to know when RichWebView is touched ```RichWebViewEvent.TOUCH```
 * Fixed the setViewPort bug in iOS which used to scroll the content to the top of the page. that won't happen anymore just like the Android side
 * Fixed other minor bugs
+
 
 *Feb 13, 2016 - V6.0.0*
 * Supporting iFrame embeded videos

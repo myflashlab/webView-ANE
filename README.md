@@ -1,4 +1,4 @@
-# Rich WebView ANE V6.2.0 (Android+iOS)
+# Rich WebView ANE V6.3.0 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 **Main Features:**
@@ -11,6 +11,7 @@ This extension is a perfect replacement to the classic StageWebView and it allow
 * Enable file picker dialog on your HTML input fields
 * Choose on the background color of your webview or make it transparent
 * TouchEvent to know when the WebView is touched
+* Optionally prevent URL loads and let Air handle them
 * change viewport and position of webview at runtime
 
 # asdoc
@@ -98,22 +99,84 @@ function onTouch(e:RichWebViewEvent):void
 
 # Air .xml manifest
 ```xml
-<!--required for enabling gps for webview-->
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<!--
+FOR ANDROID:
+-->
+<manifest android:installLocation="auto">
+		<uses-sdk android:minSdkVersion="10" android:targetSdkVersion="19" />
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+		
+		<!--required for enabling gps for webview-->
+		<uses-permission android:name="android.permission.INTERNET" />
+		<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+		
+		<application android:hardwareAccelerated="true" android:allowBackup="true">
+			<activity android:hardwareAccelerated="true">
+				<intent-filter>
+					<action android:name="android.intent.action.MAIN" />
+					<category android:name="android.intent.category.LAUNCHER" />
+				</intent-filter>
+				<intent-filter>
+					<action android:name="android.intent.action.VIEW" />
+					<category android:name="android.intent.category.BROWSABLE" />
+					<category android:name="android.intent.category.DEFAULT" />
+				</intent-filter>
+			</activity>
+			
+			<!-- required for html file select buttons -->
+			<activity android:name="com.doitflash.webView.Pick" android:theme="@style/Theme.Transparent" />
+			
+		</application>
+		
+</manifest>
 
-<!-- required for html file select buttons -->
-<activity android:name="com.doitflash.webView.Pick" android:theme="@style/Theme.Transparent" />
 
-<!--required for webview GPS access-->
-<key>NSLocationUsageDescription</key>
-<string>I need location, reason 1</string>
 
-<key>NSLocationWhenInUseUsageDescription</key>
-<string>I need location, reason 2</string>
 
-<key>NSLocationAlwaysUsageDescription</key>
-<string>I need location, reason 3</string>
+<!--
+FOR iOS:
+-->
+<InfoAdditions>
+
+	<key>MinimumOSVersion</key>
+	<string>8.0</string>
+	
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackOpaque</string>
+	
+	<key>UIRequiresPersistentWiFi</key>
+	<string>NO</string>
+	
+	<key>UIPrerenderedIcon</key>
+	<true />
+	
+	<!--required for webview GPS access-->
+	<key>NSLocationUsageDescription</key>
+	<string>I need location 1</string>
+	
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>I need location 2</string>
+	
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>I need location 3</string>
+	
+	<key>UIDeviceFamily</key>
+	<array>
+		<string>1</string>
+		<string>2</string>
+	</array>
+	
+</InfoAdditions>
+
+
+
+
+<!--
+Embedding the ANE:
+-->
+  <extensions>
+    <extensionID>com.myflashlab.air.extensions.webView</extensionID>
+  </extensions>
 ```
 
 # Setup Javascript:
@@ -143,7 +206,29 @@ http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 [How to open/parse pdf using RichWebview ANE?](http://www.myflashlabs.com/how-to-open-parse-pdf-using-richwebview-ane/)  
 
 # Changelog
-*April 30, 2016 - V6.2.0*
+*Jun 15, 2016 - V6.3.0*
+* Added support for ```setAllowUniversalAccessFromFileURLs``` on Android side. [asked here](https://github.com/myflashlab/webView-ANE/issues/93)
+* Fixed touch positions which was wrong on some iOS devices based on their DPI value. Now the returned x,y are corrected based on different devices DPI values. [asked here](https://github.com/myflashlab/webView-ANE/issues/96)
+* Introduced a new listener ```RichWebViewEvent.PAGE_STARTING``` which will notify you on the next URL which is about to load in webview. When you receive this event, you must decide if you wish the webview load the URL or you wish to handle it yourself. If you don't add the listener, the ANE will work like before BUT if you do add the listener, you MUST call ```_ex.shouldContinueLoadingTheURL();``` to allow the webview load links normally. This is shown in the sample code below.
+```actionscript
+_ex.addEventListener(RichWebViewEvent.PAGE_STARTING, onPageStarting);
+
+function onPageStarting(e:RichWebViewEvent):void
+{
+	if (String(e.param).indexOf("mailto:") == 0)
+	{
+		trace("do something with the mailto: links!");
+	}
+	else
+	{
+		// allow other link types to load normally
+		_ex.shouldContinueLoadingTheURL();
+	}
+}
+```
+
+
+*Apr 30, 2016 - V6.2.0*
 * Fixed the problem of loading local pages on some Android devices like Nexus
 * Found a solution for the StageText listeners. check out https://github.com/myflashlab/webView-ANE/issues/61#issuecomment-215052184
 * Fixed the Bitmap screenshot problem on some Android devices

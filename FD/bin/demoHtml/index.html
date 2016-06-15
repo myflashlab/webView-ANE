@@ -194,7 +194,7 @@ function onPageLoaded() {
 <body>
 	<div class="container">
 		<div class="jumbotron">
-			<h2>Rich WebView ANE V6.1.0 (iOS+Android)</h2>
+			<h2>Rich WebView ANE V6.3.0 (iOS+Android)</h2>
 			<button class="btn btn-primary btn-lg" type="button" onClick="AirBridge.evoke('closeWebView()')">closeWebView</button>
 			<hr>
 			<p>
@@ -223,6 +223,7 @@ function onPageLoaded() {
 				<li>enable file picker dialog on your HTML input fields</li>
 				<li>Choose on the background color of your webview or make it transparent</li>
 				<li>TouchEvent to know when the WebView is touched</li>
+				<li>Optionally prevent URL loads and let Air handle them</li>
 				<li>And of course you can do whatever HTML allowes you to do!</li>
 			</ul>
 
@@ -245,6 +246,15 @@ function onPageLoaded() {
 			<h3>Sending complex data from JS to Flash</h3>
 			There are times that you may wish to send a lot of information from JS to the Air side. The best approach is to create a JSON string in JS, <i>encodeURIComponent</i> it and then send to the other side. (In this example, check your debugger trace log to see the JS Json string is delivered to the Air side as soon as you hit the dollowing button.
 			<button type="button" onClick="sendComplexDataToAir()">Send Complex Data To Air</button>
+		</p>
+		<hr>
+
+
+		<p>
+			<h3>Prevent URL loads in html content and let Air handle it</h3>
+			Rich Webview allows you monitor the URL links which are about to open. In your Air application, you can listen to <b>RichWebViewEvent.PAGE_STARTING</b> listener so you will be informed when a new URL is about to open or not. For example, you wish to handle URLs like <b>mailto:email@domain.com</b> or <b>tel:5555555</b> inside your AS3 code. You can easily do that. Try hitting the below buttons, and you will see that AS3 will handle the click instead of the webview. And ofcourse you can handle any type of URL with this approach.
+			<button type="button" onClick="location.href='mailto:email@domain.com';">mailto:email@domain.com</button>
+			<button type="button" onclick="location.href='tel:5555555';">tel:5555555</button>
 		</p>
 		<hr>
 
