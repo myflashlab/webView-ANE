@@ -1,5 +1,10 @@
 Rich WebView Adobe Air Native Extension
 
+*Aug 07, 2016 - V6.4.0*
+* The constructor function ```new RichWebView(this.stage);``` accepts only one parameter from now on. However, to config the RichWebview settings, you should change static values in ```RichWebViewSettings```.
+* ```ENABLE_THIRD_PARTY_COOKIES``` added to ```RichWebViewSettings``` which enables third-party cookies on Android. Changing this value makes no difference on the iOS side. The reason is [explained here](https://discussions.apple.com/thread/4156939?tstart=0) and a possible workaround is [described here](http://stackoverflow.com/questions/9930671/safari-3rd-party-cookie-iframe-trick-no-longer-working).
+
+
 *Jun 15, 2016 - V6.3.0*
 * Added support for ```setAllowUniversalAccessFromFileURLs``` on Android side. [asked here](https://github.com/myflashlab/webView-ANE/issues/93)
 * Fixed touch positions which was wrong on some iOS devices based on their DPI value. Now the returned x,y are corrected based on different devices DPI values. [asked here](https://github.com/myflashlab/webView-ANE/issues/96)

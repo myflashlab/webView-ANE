@@ -178,6 +178,7 @@ package
 			// set optional RichWebview settings (apply these settings AFTER initializing the ANE and BEFORE opening a webpage)
 			RichWebViewSettings.ENABLE_BITMAP_CAPTURE = true;
 			RichWebViewSettings.ENABLE_COOKIES = true;
+			RichWebViewSettings.ENABLE_THIRD_PARTY_COOKIES = true;
 			RichWebViewSettings.ENABLE_GPS = true;
 			RichWebViewSettings.ENABLE_ZOOM = true;
 			RichWebViewSettings.ENABLE_SCROLL_BOUNCE = false;

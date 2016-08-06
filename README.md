@@ -1,4 +1,4 @@
-# Rich WebView ANE V6.3.0 (Android+iOS)
+# Rich WebView ANE V6.4.0 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 **Main Features:**
@@ -45,6 +45,7 @@ _ex.addEventListener(RichWebViewEvent.TOUCH, onTouch);
 // set optional RichWebview settings (apply these settings AFTER initializing the ANE and BEFORE opening a webpage)
 RichWebViewSettings.ENABLE_BITMAP_CAPTURE = true;
 RichWebViewSettings.ENABLE_COOKIES = true;
+RichWebViewSettings.ENABLE_THIRD_PARTY_COOKIES = true;
 RichWebViewSettings.ENABLE_GPS = true;
 RichWebViewSettings.ENABLE_ZOOM = true;
 RichWebViewSettings.ENABLE_SCROLL_BOUNCE = false;
@@ -206,6 +207,11 @@ http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 [How to open/parse pdf using RichWebview ANE?](http://www.myflashlabs.com/how-to-open-parse-pdf-using-richwebview-ane/)  
 
 # Changelog
+*Aug 07, 2016 - V6.4.0*
+* The constructor function ```new RichWebView(this.stage);``` accepts only one parameter from now on. However, to config the RichWebview settings, you should change static values in ```RichWebViewSettings```.
+* ```ENABLE_THIRD_PARTY_COOKIES``` added to ```RichWebViewSettings``` which enables third-party cookies on Android. Changing this value makes no difference on the iOS side. The reason is [explained here](https://discussions.apple.com/thread/4156939?tstart=0) and a possible workaround is [described here](http://stackoverflow.com/questions/9930671/safari-3rd-party-cookie-iframe-trick-no-longer-working).
+
+
 *Jun 15, 2016 - V6.3.0*
 * Added support for ```setAllowUniversalAccessFromFileURLs``` on Android side. [asked here](https://github.com/myflashlab/webView-ANE/issues/93)
 * Fixed touch positions which was wrong on some iOS devices based on their DPI value. Now the returned x,y are corrected based on different devices DPI values. [asked here](https://github.com/myflashlab/webView-ANE/issues/96)
