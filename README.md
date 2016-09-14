@@ -1,4 +1,4 @@
-# Rich WebView ANE V6.4.0 (Android+iOS)
+# Rich WebView ANE V6.5.0 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 **Main Features:**
@@ -51,6 +51,7 @@ RichWebViewSettings.ENABLE_ZOOM = true;
 RichWebViewSettings.ENABLE_SCROLL_BOUNCE = false;
 RichWebViewSettings.BG_COLOR_HEX = "#FFFFFFFF"; // AARRGGBB
 //RichWebViewSettings.USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.36 (KHTML, like Gecko) Chrome/13.0.766.0 Safari/534.36"; // useful when you are trying to load embedded YouTube or Vimeo videos
+RichWebViewSettings.ENABLE_AIR_PREFIX = true; // This property works on Android ONLY and is set to true by default.
 
 _ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.documentsDirectory.resolvePath("webview/index.html")); // OR from File.applicationStorageDirectory
 //_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://www.google.com");
@@ -207,6 +208,10 @@ http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 [How to open/parse pdf using RichWebview ANE?](http://www.myflashlabs.com/how-to-open-parse-pdf-using-richwebview-ane/)  
 
 # Changelog
+*Sep 14, 2016 - V6.5.0*
+* ```ENABLE_AIR_PREFIX``` added to ```RichWebViewSettings```. The default value is ```true```. This property is useful on the Android side only and has no effect on the iOS side. AIR apps have *air.* prefix at the beginning of their Android package name but there are methods to remove this prefix. Therefore, those devs who are removing the *air.* prefix manually, should also set this property to ```false``` for the RichWebview to be able to load local content properly.
+
+
 *Aug 07, 2016 - V6.4.0*
 * The constructor function ```new RichWebView(this.stage);``` accepts only one parameter from now on. However, to config the RichWebview settings, you should change static values in ```RichWebViewSettings```.
 * ```ENABLE_THIRD_PARTY_COOKIES``` added to ```RichWebViewSettings``` which enables third-party cookies on Android. Changing this value makes no difference on the iOS side. The reason is [explained here](https://discussions.apple.com/thread/4156939?tstart=0) and a possible workaround is [described here](http://stackoverflow.com/questions/9930671/safari-3rd-party-cookie-iframe-trick-no-longer-working).

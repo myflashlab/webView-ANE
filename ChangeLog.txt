@@ -1,5 +1,9 @@
 Rich WebView Adobe Air Native Extension
 
+*Sep 14, 2016 - V6.5.0*
+* ```ENABLE_AIR_PREFIX``` added to ```RichWebViewSettings```. The default value is ```true```. This property is useful on the Android side only and has no effect on the iOS side. AIR apps have *air.* prefix at the beginning of their Android package name but there are methods to remove this prefix. Therefore, those devs who are removing the *air.* prefix manually, should also set this property to ```false``` for the RichWebview to be able to load local content properly.
+
+
 *Aug 07, 2016 - V6.4.0*
 * The constructor function ```new RichWebView(this.stage);``` accepts only one parameter from now on. However, to config the RichWebview settings, you should change static values in ```RichWebViewSettings```.
 * ```ENABLE_THIRD_PARTY_COOKIES``` added to ```RichWebViewSettings``` which enables third-party cookies on Android. Changing this value makes no difference on the iOS side. The reason is [explained here](https://discussions.apple.com/thread/4156939?tstart=0) and a possible workaround is [described here](http://stackoverflow.com/questions/9930671/safari-3rd-party-cookie-iframe-trick-no-longer-working).

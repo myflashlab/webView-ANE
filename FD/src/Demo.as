@@ -184,6 +184,7 @@ package
 			RichWebViewSettings.ENABLE_SCROLL_BOUNCE = false;
 			RichWebViewSettings.BG_COLOR_HEX = "#FFFFFFFF"; // AARRGGBB
 			//RichWebViewSettings.USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.36 (KHTML, like Gecko) Chrome/13.0.766.0 Safari/534.36"; // useful when you are trying to load embedded YouTube or Vimeo videos
+			RichWebViewSettings.ENABLE_AIR_PREFIX = true; // This property works on Android ONLY and is set to true by default.
 			
 			var btn1:MySprite = createBtn("openWebView");
 			btn1.addEventListener(MouseEvent.CLICK, openWebViewLocal);
