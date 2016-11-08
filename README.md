@@ -1,4 +1,4 @@
-# Rich WebView ANE V6.5.0 (Android+iOS)
+# Rich WebView ANE V6.6.0 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 **Main Features:**
@@ -13,6 +13,7 @@ This extension is a perfect replacement to the classic StageWebView and it allow
 * TouchEvent to know when the WebView is touched
 * Optionally prevent URL loads and let Air handle them
 * change viewport and position of webview at runtime
+* Optimized for Android Manual Permissions.
 
 # asdoc
 [find the latest asdoc for this ANE here.](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/webView/package-detail.html)
@@ -24,6 +25,8 @@ you may like to see the ANE in action? [Download demo .apk](https://github.com/m
 [Download the ANE](https://github.com/myflashlab/webView-ANE/tree/master/FD/lib)
 
 # Air Usage
+For the complete AS3 code usage, see the [demo project here](https://github.com/myflashlab/webView-ANE/blob/master/FD/src/Demo.as).
+
 ```actionscript
 import com.myflashlab.air.extensions.webView.RichWebView;
 import com.myflashlab.air.extensions.webView.RichWebViewEvent;
@@ -105,7 +108,10 @@ function onTouch(e:RichWebViewEvent):void
 FOR ANDROID:
 -->
 <manifest android:installLocation="auto">
-		<uses-sdk android:minSdkVersion="10" android:targetSdkVersion="19" />
+		
+		<!--The new Permission thing on Android works ONLY if you are targetting Android SDK 23 or higher-->
+		<uses-sdk android:targetSdkVersion="23"/>
+		
 		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 		
 		<!--required for enabling gps for webview-->
@@ -177,7 +183,14 @@ FOR iOS:
 Embedding the ANE:
 -->
   <extensions>
-    <extensionID>com.myflashlab.air.extensions.webView</extensionID>
+	<extensionID>com.myflashlab.air.extensions.webView</extensionID>
+	
+	<!-- Required if you are targetting AIR 24+ and have to take care of Permissions mannually -->
+	<extensionID>com.myflashlab.air.extensions.permissionCheck</extensionID>
+	
+	<!-- The following dependency ANEs are only required when compiling for Android -->
+	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
   </extensions>
 ```
 
@@ -193,8 +206,21 @@ AirBridge.evoke("toVibrate");
 ```
 
 # Requirements
+* This ANE is dependent on **androidSupport.ane** and **overrideAir.ane**. Download them from [here](https://github.com/myflashlab/common-dependencies-ANE).
 * Android SDK 10 or higher (lower Android SDKs like Android 2.3.6 will not support HTML5 completly, so you must consider this fact in your HTML/JS logic)
 * iOS 8.0 or higher
+
+# Permissions
+If you are targetting AIR 24 or higher, you need to [take care of the permissions mannually](http://www.myflashlabs.com/adobe-air-app-permissions-android-ios/). Below are the list of Permissions this ANE might require. (Note: *Necessary Permissions* are those that the ANE will NOT work without them and *Optional Permissions* are those which are needed only if you are using some specific features in the ANE.)
+
+Check out the demo project available at this repository to see how we have used our [PermissionCheck ANE](http://www.myflashlabs.com/product/native-access-permission-check-settings-menu-air-native-extension/) to ask for the permissions.
+
+**Necessary Permissions:**  
+none
+
+**Optional Permissions:**  
+1. PermissionCheck.SOURCE_LOCATION
+2. PermissionCheck.SOURCE_STORAGE
 
 # Commercial Version
 http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
@@ -208,6 +234,9 @@ http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 [How to open/parse pdf using RichWebview ANE?](http://www.myflashlabs.com/how-to-open-parse-pdf-using-richwebview-ane/)  
 
 # Changelog
+*Nov 08, 2016 - V6.6.0*
+* Optimized for Android manual permissions if you are targeting AIR SDK 24+
+
 *Sep 14, 2016 - V6.5.0*
 * ```ENABLE_AIR_PREFIX``` added to ```RichWebViewSettings```. The default value is ```true```. This property is useful on the Android side only and has no effect on the iOS side. AIR apps have *air.* prefix at the beginning of their Android package name but there are methods to remove this prefix. Therefore, those devs who are removing the *air.* prefix manually, should also set this property to ```false``` for the RichWebview to be able to load local content properly.
 

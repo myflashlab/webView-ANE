@@ -12,7 +12,7 @@
     <movie minorVersion="0" />
     <movie platform="AIR Mobile" />
     <movie background="#C0C0C0" />
-    <movie preferredSDK="Flex 4.6.0, AIR 22.0;4.6.0, 22.0;" />
+    <movie preferredSDK="Flex 4.6.0, AIR 24.0;4.6.0, 24.0;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -43,7 +43,7 @@
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />
-    <option additional="-swf-version=32" />
+    <option additional="-swf-version=35" />
     <option compilerConstants="" />
     <option minorVersion="" />
   </build>
@@ -58,6 +58,7 @@
     <element path="lib\barcodeExtension.ane" />
     <element path="lib\downloadManager.ane" />
     <element path="lib\richWebView.ane" />
+    <element path="lib\permissionCheck.ane" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

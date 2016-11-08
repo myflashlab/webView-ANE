@@ -1,16 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<application xmlns="http://ns.adobe.com/air/application/21.0">
+<application xmlns="http://ns.adobe.com/air/application/24.0">
   <id>com.doitflash.exWebView</id>
-  <versionNumber>6.3.0</versionNumber>
+  <versionNumber>6.6.0</versionNumber>
   <supportedProfiles>mobileDevice</supportedProfiles>
   <filename>exWebView</filename>
   <name>Rich Webview</name>
   <android>
     <manifestAdditions>
 		<![CDATA[<manifest android:installLocation="auto">
-		<uses-sdk android:minSdkVersion="10" android:targetSdkVersion="19" />
 		<uses-permission android:name="android.permission.WAKE_LOCK" />
 		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+			
+		<!--The new Permission thing on Android works ONLY if you are targetting Android SDK 23 or higher-->
+		<uses-sdk android:targetSdkVersion="23"/>
 		
 		<!--required for enabling gps for webview-->
 		<uses-permission android:name="android.permission.INTERNET" />
@@ -42,7 +44,7 @@
     <!-- A list of plist key/value pairs to be added to the application Info.plist -->
     <InfoAdditions>
 		<![CDATA[<key>MinimumOSVersion</key>
-		<string>8.0</string>
+		<string>6.1</string>
 		
 		<key>UIStatusBarStyle</key>
 		<string>UIStatusBarStyleBlackOpaque</string>
@@ -52,6 +54,11 @@
 		
 		<key>UIPrerenderedIcon</key>
 		<true />
+			
+		<key>NSAppTransportSecurity</key>  
+		<dict>  
+			<key>NSAllowsArbitraryLoads</key><true/>  
+		</dict>
 		
 		<!--required for webview GPS access-->
 			<key>NSLocationUsageDescription</key>
@@ -99,5 +106,12 @@
   </icon>
   <extensions>
     <extensionID>com.myflashlab.air.extensions.webView</extensionID>
+	
+	<!-- Required if you are targetting AIR 24+ and have to take care of Permissions mannually -->
+	<extensionID>com.myflashlab.air.extensions.permissionCheck</extensionID>
+	
+	<!-- The following dependency ANEs are only required when compiling for Android -->
+	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
+	<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
   </extensions>
 </application>

@@ -3,6 +3,7 @@ package
 	import com.myflashlab.air.extensions.webView.RichWebView;
 	import com.myflashlab.air.extensions.webView.RichWebViewEvent;
 	import com.myflashlab.air.extensions.webView.RichWebViewSettings;
+	import com.myflashlab.air.extensions.nativePermissions.PermissionCheck;
 	import com.doitflash.consts.Direction;
 	import com.doitflash.consts.Orientation;
 	import com.doitflash.mobileProject.commonCpuSrc.DeviceInfo;
@@ -23,6 +24,7 @@ package
 	import flash.filesystem.File;
 	import flash.geom.Rectangle;
 	import flash.media.Sound;
+	import flash.net.URLRequest;
 	import flash.text.AntiAliasType;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
@@ -34,7 +36,7 @@ package
 	import com.greensock.TweenMax;
 	import com.greensock.easing.*;
 	import flash.utils.setTimeout;
-	
+	import air.net.URLMonitor;
 	import com.doitflash.tools.DynamicFunc;
 	
 	/**
@@ -44,6 +46,7 @@ package
 	public class Demo extends Sprite 
 	{
 		private var _ex:RichWebView;
+		private var _exPermissions:PermissionCheck = new PermissionCheck();
 		
 		private const BTN_WIDTH:Number = 150;
 		private const BTN_HEIGHT:Number = 60;
@@ -101,7 +104,7 @@ package
 			
 			C.log("iOS is crazy with understanding stageWidth and stageHeight, you already now that :)");
 			C.log("So, we should wait a couple of seconds before initializing RichWebview to make sure the stage dimention is stable before passing it through the ANE.");
-			setTimeout(init, 2000);
+			setTimeout(checkPermissions, 2500);
 		}
 		
 		private function onInvoke(e:InvokeEvent):void
@@ -154,10 +157,40 @@ package
 			}
 		}
 		
+		private function checkPermissions():void
+		{
+			// first you need to make sure you have access to the Location if you are on Android?
+			var permissionState:int = _exPermissions.check(PermissionCheck.SOURCE_LOCATION);
+			
+			if (permissionState == PermissionCheck.PERMISSION_UNKNOWN || permissionState == PermissionCheck.PERMISSION_DENIED)
+			{
+				_exPermissions.request(PermissionCheck.SOURCE_LOCATION, onRequestResult);
+			}
+			else
+			{
+				init();
+			}
+			
+			function onRequestResult($state:int):void
+			{
+				if ($state != PermissionCheck.PERMISSION_GRANTED)
+				{
+					C.log("You did not allow the app the required permissions!");
+				}
+				else
+				{
+					init();
+				}
+			}
+		}
+		
 		private function init():void
 		{
 			var src:File = File.applicationDirectory.resolvePath("demoHtml");
+			
+			// if you are using the documentsDirectory on Android, then you need to ask for the PermissionCheck.SOURCE_STORAGE permission
 			//var dis:File = File.documentsDirectory.resolvePath("demoHtml");
+			
 			var dis:File = File.applicationStorageDirectory.resolvePath("demoHtml");
 			if (dis.exists) dis.deleteDirectory(true);
 			if (!dis.exists) src.copyTo(dis, true);
@@ -204,8 +237,6 @@ package
 				
 				// to open local PDF files, check here: http://www.myflashlabs.com/product/pdf-reader-ane-adobe-air-native-extension/
 			}
-			
-			
 			
 			
 			onResize();
@@ -392,6 +423,12 @@ package
 		
 		
 		
+		
+		
+
+
+
+
 		
 		
 		
