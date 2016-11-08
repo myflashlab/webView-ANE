@@ -2,6 +2,7 @@ Rich WebView Adobe Air Native Extension
 
 *Nov 08, 2016 - V6.6.0*
 * Optimized for Android manual permissions if you are targeting AIR SDK 24+
+* From now on, this ANE will depend on androidSupport.ane and overrideAir.ane on the Android side
 
 *Sep 14, 2016 - V6.5.0*
 * ```ENABLE_AIR_PREFIX``` added to ```RichWebViewSettings```. The default value is ```true```. This property is useful on the Android side only and has no effect on the iOS side. AIR apps have *air.* prefix at the beginning of their Android package name but there are methods to remove this prefix. Therefore, those devs who are removing the *air.* prefix manually, should also set this property to ```false``` for the RichWebview to be able to load local content properly.

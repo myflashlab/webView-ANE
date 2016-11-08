@@ -102,7 +102,7 @@ function onTouch(e:RichWebViewEvent):void
 }
 ```
 
-# Air .xml manifest
+# AIR .xml manifest
 ```xml
 <!--
 FOR ANDROID:
@@ -185,7 +185,7 @@ Embedding the ANE:
   <extensions>
 	<extensionID>com.myflashlab.air.extensions.webView</extensionID>
 	
-	<!-- Required if you are targetting AIR 24+ and have to take care of Permissions mannually -->
+	<!-- Required if you are targeting AIR 24+ and have to take care of Permissions mannually -->
 	<extensionID>com.myflashlab.air.extensions.permissionCheck</extensionID>
 	
 	<!-- The following dependency ANEs are only required when compiling for Android -->
@@ -211,7 +211,7 @@ AirBridge.evoke("toVibrate");
 * iOS 8.0 or higher
 
 # Permissions
-If you are targetting AIR 24 or higher, you need to [take care of the permissions mannually](http://www.myflashlabs.com/adobe-air-app-permissions-android-ios/). Below are the list of Permissions this ANE might require. (Note: *Necessary Permissions* are those that the ANE will NOT work without them and *Optional Permissions* are those which are needed only if you are using some specific features in the ANE.)
+If you are targeting AIR 24 or higher, you need to [take care of the permissions mannually](http://www.myflashlabs.com/adobe-air-app-permissions-android-ios/). Below are the list of Permissions this ANE might require. (Note: *Necessary Permissions* are those that the ANE will NOT work without them and *Optional Permissions* are those which are needed only if you are using some specific features in the ANE.)
 
 Check out the demo project available at this repository to see how we have used our [PermissionCheck ANE](http://www.myflashlabs.com/product/native-access-permission-check-settings-menu-air-native-extension/) to ask for the permissions.
 
@@ -236,6 +236,7 @@ http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 # Changelog
 *Nov 08, 2016 - V6.6.0*
 * Optimized for Android manual permissions if you are targeting AIR SDK 24+
+* From now on, this ANE will depend on androidSupport.ane and overrideAir.ane on the Android side
 
 *Sep 14, 2016 - V6.5.0*
 * ```ENABLE_AIR_PREFIX``` added to ```RichWebViewSettings```. The default value is ```true```. This property is useful on the Android side only and has no effect on the iOS side. AIR apps have *air.* prefix at the beginning of their Android package name but there are methods to remove this prefix. Therefore, those devs who are removing the *air.* prefix manually, should also set this property to ```false``` for the RichWebview to be able to load local content properly.
