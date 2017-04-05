@@ -3,16 +3,12 @@ cd %~dp0 & cd ..
 
 :user_configuration
 
-:: Static path to Flex SDK
-set FLEX_SDK=D:\flex_sdk_4.6_air_sdk_24-beta
-
-:: Use FD supplied SDK path if executed from FD
-if exist "%FD_CUR_SDK%" set FLEX_SDK=%FD_CUR_SDK%
+call .\..\..\..\SDK.bat
+:: remove the above line and set the SDK paths directly like below
+::set FLEX_SDK=D:\flex_sdk_4.6_air_sdk_24-beta
+::set ANDROID_SDK=D:\android
 
 set AUTO_INSTALL_IOS=yes
-
-:: Path to Android SDK
-set ANDROID_SDK=D:\android
 
 :validation
 if not exist "%FLEX_SDK%\bin" goto flexsdk

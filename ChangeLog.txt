@@ -1,5 +1,10 @@
 Rich WebView Adobe Air Native Extension
 
+*Apr 05, 2017 - V7.0.0*
+* Added support for Android customtabs - Sample codes updated
+* Added support for iOS safariViewController - Sample codes updated
+* Updated the ANE with the latest version of overrideAir. if you are building for iOS only, you still need to include this dependency in your project
+
 *Nov 08, 2016 - V6.6.0*
 * Optimized for Android manual permissions if you are targeting AIR SDK 24+
 * From now on, this ANE will depend on androidSupport.ane and overrideAir.ane on the Android side

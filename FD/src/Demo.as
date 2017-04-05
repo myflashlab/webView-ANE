@@ -219,6 +219,105 @@ package
 			//RichWebViewSettings.USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.36 (KHTML, like Gecko) Chrome/13.0.766.0 Safari/534.36"; // useful when you are trying to load embedded YouTube or Vimeo videos
 			RichWebViewSettings.ENABLE_AIR_PREFIX = true; // This property works on Android ONLY and is set to true by default.
 			
+			// initialize the embedded Browser feature
+			if (!_ex.isEmbeddedBrowserInitialized)
+			{
+				_ex.addEventListener(RichWebViewEvent.EMBEDDED_BROWSER_NAVIGATION_EVENT, onEmbeddedBrowserNavigationEvent);
+				_ex.addEventListener(RichWebViewEvent.EMBEDDED_BROWSER_ACTION, onEmbeddedBrowserAction);
+				_ex.initEmbeddedBrowser();
+			}
+			
+			// set optional settings for the embedded browser - Android side
+			RichWebViewSettings.EMBEDDED_BROWSER.android.toolbarColor = "#3F51B5";
+			RichWebViewSettings.EMBEDDED_BROWSER.android.secondaryToolbarColor = "#303F9F";
+			RichWebViewSettings.EMBEDDED_BROWSER.android.addMenuItem("item 1", true);
+			RichWebViewSettings.EMBEDDED_BROWSER.android.addMenuItem("item 2");
+			RichWebViewSettings.EMBEDDED_BROWSER.android.addMenuItem("item 3");
+			RichWebViewSettings.EMBEDDED_BROWSER.android.addMenuItem("item 4");
+			RichWebViewSettings.EMBEDDED_BROWSER.android.actionButton("ic_default_action_btn_for_custom_tab", "action btn description"); // use the Resource Manager Tool to add the icon into "richWebView.ane"
+			RichWebViewSettings.EMBEDDED_BROWSER.android.enableUrlBarHiding = true;
+			RichWebViewSettings.EMBEDDED_BROWSER.android.closeBtnIcon = "ic_default_close_btn_for_custom_tab"; // use the Resource Manager Tool to add the icon into "richWebView.ane"
+			RichWebViewSettings.EMBEDDED_BROWSER.android.showTitle = true;
+			RichWebViewSettings.EMBEDDED_BROWSER.android.defaultShareMenuItem = true;
+			RichWebViewSettings.EMBEDDED_BROWSER.android.isWeakActivity = false;
+			RichWebViewSettings.EMBEDDED_BROWSER.android.mayLaunchUrl = "https://www.google.com/";
+			
+			// set optional settings for the embedded browser - iOS side
+			RichWebViewSettings.EMBEDDED_BROWSER.ios.barColor = "#CCCCCC"; // if iOS < 10, nothing happens
+			RichWebViewSettings.EMBEDDED_BROWSER.ios.controlColor = "#AAAAAA"; // if iOS < 10, nothing happens
+			
+			// ---------------------------------------------------------------------------------------------------------------------
+			
+			if (_ex.isEmbeddedBrowserSupported())
+			{
+				var btn0:MySprite = createBtn("open Embedded Browser");
+				btn0.addEventListener(MouseEvent.CLICK, openEmbeddedBrowser);
+				_list.add(btn0);
+			}
+			
+			// ---------------------------------------------------------------------------------------------------------------------
+			
+			function openEmbeddedBrowser(e:MouseEvent):void
+			{
+				var result:Boolean = _ex.openEmbeddedBrowser("https://www.google.com/");
+				
+				if (!result) 
+				{
+					C.log("could not open! Possible reasons are:");
+					C.log("1) Have you called \"_ex.initEmbeddedBrowser();\"? ");
+					C.log("2) Make sure all the \"RichWebViewSettings.EMBEDDED_BROWSER\" parameters are valid.");
+				}
+			}
+			
+			function onEmbeddedBrowserNavigationEvent(e:RichWebViewEvent):void
+			{
+				switch (e.param) 
+				{
+					case RichWebViewEvent.EMBEDDED_BROWSER_NAVIGATION_STARTED:
+						
+						trace("EMBEDDED_BROWSER NAVIGATION_STARTED");
+						
+					break;
+					case RichWebViewEvent.EMBEDDED_BROWSER_NAVIGATION_FINISHED:
+						
+						trace("EMBEDDED_BROWSER NAVIGATION_FINISHED");
+						
+					break;
+					case RichWebViewEvent.EMBEDDED_BROWSER_NAVIGATION_FAILED:
+						
+						trace("EMBEDDED_BROWSER NAVIGATION_FAILED");
+						
+					break;
+					case RichWebViewEvent.EMBEDDED_BROWSER_NAVIGATION_ABORTED:
+						
+						trace("EMBEDDED_BROWSER NAVIGATION_ABORTED");
+						
+					break;
+					case RichWebViewEvent.EMBEDDED_BROWSER_CLOSED:
+						
+						trace("EMBEDDED_BROWSER CLOSED");
+						C.log("EMBEDDED_BROWSER CLOSED");
+						
+					break;
+					default:
+				}
+			}
+			
+			function onEmbeddedBrowserAction(e:RichWebViewEvent):void
+			{
+				trace("--------- onEmbeddedBrowserAction ------------");
+				trace("item = " + e.param.item);
+				trace("url = " + e.param.url);
+				trace("----------------------------------------------");
+				
+				C.log("--------- onEmbeddedBrowserAction ------------");
+				C.log("item = " + e.param.item);
+				C.log("url = " + e.param.url);
+				C.log("----------------------------------------------");
+			}
+			
+			// ---------------------------------------------------------------------------------------------------------------------
+			
 			var btn1:MySprite = createBtn("openWebView");
 			btn1.addEventListener(MouseEvent.CLICK, openWebViewLocal);
 			_list.add(btn1);
@@ -227,7 +326,7 @@ package
 			{
 				//_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.documentsDirectory.resolvePath("demoHtml/index.html"));
 				_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.applicationStorageDirectory.resolvePath("demoHtml/index.html"));
-				//_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://google.com/");
+				//_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "https://google.com/");
 				
 				// opening a pdf in iOS is very straight forward like this:
 				//_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "http://www.myflashlabs.com/showcase/test.pdf");
@@ -327,7 +426,6 @@ package
 		private function onTouch(e:RichWebViewEvent):void
 		{
 			trace("onTouch > " + "x = " + e.param.x + " y = " + e.param.y);
-			C.log("onTouch > " + "x = " + e.param.x + " y = " + e.param.y);
 		}
 		
 // --------------------------------------------------------------------------------- funcs to be called from JS

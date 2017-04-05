@@ -1,4 +1,4 @@
-# Rich WebView ANE V6.6.0 (Android+iOS)
+# Rich WebView ANE V7.0.0 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 **Main Features:**
@@ -14,6 +14,8 @@ This extension is a perfect replacement to the classic StageWebView and it allow
 * Optionally prevent URL loads and let Air handle them
 * change viewport and position of webview at runtime
 * Optimized for Android Manual Permissions.
+* Support Android custom-tabs
+* Supports iOS SafariViewController
 
 # asdoc
 [find the latest asdoc for this ANE here.](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/webView/package-detail.html)
@@ -99,6 +101,92 @@ function onScreenshot(e:RichWebViewEvent):void
 function onTouch(e:RichWebViewEvent):void
 {
 	trace("onTouch > " + "x = " + e.param.x + " y = " + e.param.y);
+}
+```
+
+# Air Usage - Embedded Browser
+
+```actionscript
+import com.myflashlab.air.extensions.webView.RichWebView;
+import com.myflashlab.air.extensions.webView.RichWebViewEvent;
+import com.myflashlab.air.extensions.webView.RichWebViewSettings;
+
+var _ex = new RichWebView(this.stage);
+
+// initialize the embedded Browser feature (Custom Tabs on Android and SafariViewController on iOS)
+if (!_ex.isEmbeddedBrowserInitialized)
+{
+	_ex.addEventListener(RichWebViewEvent.EMBEDDED_BROWSER_NAVIGATION_EVENT, onEmbeddedBrowserNavigationEvent);
+	_ex.addEventListener(RichWebViewEvent.EMBEDDED_BROWSER_ACTION, onEmbeddedBrowserAction);
+	_ex.initEmbeddedBrowser();
+}
+
+// set optional settings for the embedded browser - Android side
+RichWebViewSettings.EMBEDDED_BROWSER.android.toolbarColor = "#3F51B5";
+RichWebViewSettings.EMBEDDED_BROWSER.android.secondaryToolbarColor = "#303F9F";
+RichWebViewSettings.EMBEDDED_BROWSER.android.addMenuItem("item 1", true);
+RichWebViewSettings.EMBEDDED_BROWSER.android.addMenuItem("item 2");
+RichWebViewSettings.EMBEDDED_BROWSER.android.addMenuItem("item 3");
+RichWebViewSettings.EMBEDDED_BROWSER.android.addMenuItem("item 4");
+RichWebViewSettings.EMBEDDED_BROWSER.android.actionButton("ic_default_action_btn_for_custom_tab", "action btn description"); // use the Resource Manager Tool to add the icon into "richWebView.ane"
+RichWebViewSettings.EMBEDDED_BROWSER.android.enableUrlBarHiding = true;
+RichWebViewSettings.EMBEDDED_BROWSER.android.closeBtnIcon = "ic_default_close_btn_for_custom_tab"; // use the Resource Manager Tool to add the icon into "richWebView.ane"
+RichWebViewSettings.EMBEDDED_BROWSER.android.showTitle = true;
+RichWebViewSettings.EMBEDDED_BROWSER.android.defaultShareMenuItem = true;
+RichWebViewSettings.EMBEDDED_BROWSER.android.isWeakActivity = false;
+RichWebViewSettings.EMBEDDED_BROWSER.android.mayLaunchUrl = "https://www.google.com/";
+
+// set optional settings for the embedded browser - iOS side
+RichWebViewSettings.EMBEDDED_BROWSER.ios.barColor = "#CCCCCC"; // if iOS < 10, nothing happens
+RichWebViewSettings.EMBEDDED_BROWSER.ios.controlColor = "#AAAAAA"; // if iOS < 10, nothing happens
+
+if (_ex.isEmbeddedBrowserSupported())
+{
+	// SafariViewController works on iOS9+
+	// custom-tabs works on Android devices whith the chrome browser being updated
+	
+	_ex.openEmbeddedBrowser("https://www.google.com/");
+}
+
+function onEmbeddedBrowserNavigationEvent(e:RichWebViewEvent):void
+{
+	switch (e.param) 
+	{
+		case RichWebViewEvent.EMBEDDED_BROWSER_NAVIGATION_STARTED:
+			
+			trace("EMBEDDED_BROWSER NAVIGATION_STARTED");
+			
+		break;
+		case RichWebViewEvent.EMBEDDED_BROWSER_NAVIGATION_FINISHED:
+			
+			trace("EMBEDDED_BROWSER NAVIGATION_FINISHED");
+			
+		break;
+		case RichWebViewEvent.EMBEDDED_BROWSER_NAVIGATION_FAILED:
+			
+			trace("EMBEDDED_BROWSER NAVIGATION_FAILED");
+			
+		break;
+		case RichWebViewEvent.EMBEDDED_BROWSER_NAVIGATION_ABORTED:
+			
+			trace("EMBEDDED_BROWSER NAVIGATION_ABORTED");
+			
+		break;
+		case RichWebViewEvent.EMBEDDED_BROWSER_CLOSED:
+			
+			trace("EMBEDDED_BROWSER CLOSED");
+			
+		break;
+		default:
+	}
+}
+
+function onEmbeddedBrowserAction(e:RichWebViewEvent):void
+{
+	trace("--------- onEmbeddedBrowserAction ------------");
+	trace("item = " + e.param.item);
+	trace("url = " + e.param.url);
+	trace("----------------------------------------------");
 }
 ```
 
@@ -234,6 +322,11 @@ http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 [How to open/parse pdf using RichWebview ANE?](http://www.myflashlabs.com/how-to-open-parse-pdf-using-richwebview-ane/)  
 
 # Changelog
+*Apr 05, 2017 - V7.0.0*
+* Added support for Android customtabs - Sample codes updated
+* Added support for iOS safariViewController - Sample codes updated
+* Updated the ANE with the latest version of overrideAir. if you are building for iOS only, you still need to include this dependency in your project
+
 *Nov 08, 2016 - V6.6.0*
 * Optimized for Android manual permissions if you are targeting AIR SDK 24+
 * From now on, this ANE will depend on androidSupport.ane and overrideAir.ane on the Android side
