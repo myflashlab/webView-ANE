@@ -1,4 +1,4 @@
-# Rich WebView ANE V7.0.0 (Android+iOS)
+# Rich WebView ANE V7.1.0 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 **Main Features:**
@@ -14,6 +14,7 @@ This extension is a perfect replacement to the classic StageWebView and it allow
 * Optionally prevent URL loads and let Air handle them
 * change viewport and position of webview at runtime
 * Optimized for Android Manual Permissions.
+* Load HTML Strings directly into the WebView instance
 * Support Android custom-tabs
 * Supports iOS SafariViewController
 
@@ -276,7 +277,7 @@ Embedding the ANE:
 	<!-- Required if you are targeting AIR 24+ and have to take care of Permissions mannually -->
 	<extensionID>com.myflashlab.air.extensions.permissionCheck</extensionID>
 	
-	<!-- The following dependency ANEs are only required when compiling for Android -->
+	<!-- The following dependency ANEs are required https://github.com/myflashlab/common-dependencies-ANE -->
 	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
 	<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
   </extensions>
@@ -322,6 +323,10 @@ http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 [How to open/parse pdf using RichWebview ANE?](http://www.myflashlabs.com/how-to-open-parse-pdf-using-richwebview-ane/)  
 
 # Changelog
+*May 08, 2017 - V7.1.0*
+* Added support for loading HTML Strings directly. [openData](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/webView/RichWebView.html#openData())
+* Find usage in sample [Demo.as](https://github.com/myflashlab/webView-ANE/blob/master/FD/src/Demo.as)
+
 *Apr 05, 2017 - V7.0.0*
 * Added support for Android customtabs - Sample codes updated
 * Added support for iOS safariViewController - Sample codes updated

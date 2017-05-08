@@ -3,6 +3,7 @@ package
 	import com.myflashlab.air.extensions.webView.RichWebView;
 	import com.myflashlab.air.extensions.webView.RichWebViewEvent;
 	import com.myflashlab.air.extensions.webView.RichWebViewSettings;
+	import com.myflashlab.air.extensions.webView.HtmlDataSettings;
 	import com.myflashlab.air.extensions.nativePermissions.PermissionCheck;
 	import com.doitflash.consts.Direction;
 	import com.doitflash.consts.Orientation;
@@ -318,12 +319,36 @@ package
 			
 			// ---------------------------------------------------------------------------------------------------------------------
 			
-			var btn1:MySprite = createBtn("openWebView");
-			btn1.addEventListener(MouseEvent.CLICK, openWebViewLocal);
+			var btn1:MySprite = createBtn("open HTML Data");
+			btn1.addEventListener(MouseEvent.CLICK, openHtmlData);
 			_list.add(btn1);
+			
+			function openHtmlData(e:MouseEvent):void
+			{
+				// this listener must be removed for the HTML String to be successfully load on the iOS side.
+				_ex.removeEventListener(RichWebViewEvent.PAGE_STARTING, onPageStarting);
+				
+				var dataSettings:HtmlDataSettings = new HtmlDataSettings();
+				
+				dataSettings.baseUrl = null;
+				dataSettings.encoding = "UTF-8";
+				dataSettings.mimeType = "text/html";
+				dataSettings.historyUrl = null; // this property has no effect on the iOS side
+				dataSettings.data = "<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\"><title>RichWebView ANE</title></head><body><p>This is a String which is shown on the RichWebView ANE as an HTML content.<br><br>Enjoy Building AIR apps<br><a href=\"http://www.myflashlabs.com/\">myflashlabs Team</a></p></body></html>";
+				
+				_ex.openData(0, 0, stage.stageWidth, stage.stageHeight, dataSettings);
+			}
+			
+			// ---------------------------------------------------------------------------------------------------------------------
+			
+			var btn2:MySprite = createBtn("openWebView");
+			btn2.addEventListener(MouseEvent.CLICK, openWebViewLocal);
+			_list.add(btn2);
 			
 			function openWebViewLocal(e:MouseEvent):void
 			{
+				if (!_ex.hasEventListener(RichWebViewEvent.PAGE_STARTING)) _ex.addEventListener(RichWebViewEvent.PAGE_STARTING, onPageStarting);
+				
 				//_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.documentsDirectory.resolvePath("demoHtml/index.html"));
 				_ex.openWebViewLocal(0, 0, stage.stageWidth, stage.stageHeight, File.applicationStorageDirectory.resolvePath("demoHtml/index.html"));
 				//_ex.openWebViewURL(0, 0, stage.stageWidth, stage.stageHeight, "https://google.com/");
@@ -336,7 +361,6 @@ package
 				
 				// to open local PDF files, check here: http://www.myflashlabs.com/product/pdf-reader-ane-adobe-air-native-extension/
 			}
-			
 			
 			onResize();
 		}
@@ -527,8 +551,6 @@ package
 
 
 
-		
-		
 		
 		private function createBtn($str:String):MySprite
 		{
