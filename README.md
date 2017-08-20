@@ -1,4 +1,4 @@
-# Rich WebView ANE V7.1.0 (Android+iOS)
+# Rich WebView ANE V7.1.1 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 **Main Features:**
@@ -22,13 +22,13 @@ This extension is a perfect replacement to the classic StageWebView and it allow
 [find the latest asdoc for this ANE here.](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/webView/package-detail.html)
 
 # Demo .apk
-you may like to see the ANE in action? [Download demo .apk](https://github.com/myflashlab/webView-ANE/tree/master/FD/dist)
+you may like to see the ANE in action? [Download demo .apk](https://github.com/myflashlab/webView-ANE/tree/master/AIR/out)
 
 **NOTICE**: the demo ANE works only after you hit the "OK" button in the dialog which opens. in your tests make sure that you are NOT calling other ANE methods prior to hitting the "OK" button.
-[Download the ANE](https://github.com/myflashlab/webView-ANE/tree/master/FD/lib)
+[Download the ANE](https://github.com/myflashlab/webView-ANE/tree/master/AIR/lib)
 
 # Air Usage
-For the complete AS3 code usage, see the [demo project here](https://github.com/myflashlab/webView-ANE/blob/master/FD/src/Demo.as).
+For the complete AS3 code usage, see the [demo project here](https://github.com/myflashlab/webView-ANE/blob/master/AIR/src/Main.as).
 
 ```actionscript
 import com.myflashlab.air.extensions.webView.RichWebView;
@@ -223,6 +223,9 @@ FOR ANDROID:
 			<!-- required for html file select buttons -->
 			<activity android:name="com.doitflash.webView.Pick" android:theme="@style/Theme.Transparent" />
 			
+			<!-- required for customtabs support on Android -->
+			<receiver android:name="com.doitflash.webView.ChromeTabActionBroadcastReceiver" />
+			
 		</application>
 		
 </manifest>
@@ -248,14 +251,11 @@ FOR iOS:
 	<true />
 	
 	<!--required for webview GPS access-->
-	<key>NSLocationUsageDescription</key>
-	<string>I need location 1</string>
-	
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>I need location 2</string>
+	<string>I need location when in use</string>
 	
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>I need location 3</string>
+	<string>I need location always</string>
 	
 	<key>UIDeviceFamily</key>
 	<array>
@@ -296,7 +296,7 @@ AirBridge.evoke("toVibrate");
 
 # Requirements
 * This ANE is dependent on **androidSupport.ane** and **overrideAir.ane**. Download them from [here](https://github.com/myflashlab/common-dependencies-ANE).
-* Android SDK 10 or higher (lower Android SDKs like Android 2.3.6 will not support HTML5 completly, so you must consider this fact in your HTML/JS logic)
+* Android SDK 10 or higher (lower Android SDKs like Android 2.3.6 will not support HTML5 completely, so you must consider this fact in your HTML/JS logic)
 * iOS 8.0 or higher
 
 # Permissions
@@ -308,8 +308,10 @@ Check out the demo project available at this repository to see how we have used 
 none
 
 **Optional Permissions:**  
-1. PermissionCheck.SOURCE_LOCATION
-2. PermissionCheck.SOURCE_STORAGE
+1. PermissionCheck.SOURCE_LOCATION (Android)
+2. PermissionCheck.SOURCE_LOCATION_WHEN_IN_USE (iOS)
+3. PermissionCheck.SOURCE_LOCATION_ALWAYS (iOS)
+3. PermissionCheck.SOURCE_STORAGE (Android)
 
 # Commercial Version
 http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
@@ -323,9 +325,13 @@ http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 [How to open/parse pdf using RichWebview ANE?](http://www.myflashlabs.com/how-to-open-parse-pdf-using-richwebview-ane/)  
 
 # Changelog
+*Aug 20, 2017 - V7.1.1*
+* Fixed customtabs on Android devices with Android version 7.1.1 and higher. The equal version numbers are just a coincidence :D 
+* Added sample intelliJ app
+
 *May 08, 2017 - V7.1.0*
 * Added support for loading HTML Strings directly. [openData](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/webView/RichWebView.html#openData())
-* Find usage in sample [Demo.as](https://github.com/myflashlab/webView-ANE/blob/master/FD/src/Demo.as)
+* Find usage in sample [Demo.as](https://github.com/myflashlab/webView-ANE/blob/master/AIR/src/Demo.as)
 
 *Apr 05, 2017 - V7.0.0*
 * Added support for Android customtabs - Sample codes updated

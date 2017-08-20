@@ -1,5 +1,9 @@
 Rich WebView Adobe Air Native Extension
 
+*Aug 20, 2017 - V7.1.1*
+* Fixed customtabs on Android devices with Android version 7.1.1 and higher. The equal version numbers are just a coincidence :D 
+* Added sample intelliJ app
+
 *May 08, 2017 - V7.1.0*
 * Added support for loading HTML Strings directly. [openData](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/webView/RichWebView.html#openData())
 * Find usage in sample [Demo.as](https://github.com/myflashlab/webView-ANE/blob/master/FD/src/Demo.as)
