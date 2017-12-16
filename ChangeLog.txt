@@ -1,5 +1,8 @@
 Rich WebView Adobe Air Native Extension
 
+*Dec 15, 2017 - V7.1.3*
+* optimized for [ANE-LAB sofwate](https://github.com/myflashlab/ANE-LAB).
+
 *Aug 20, 2017 - V7.1.1*
 * Fixed customtabs on Android devices with Android version 7.1.1 and higher. The equal version numbers are just a coincidence :D 
 * Added sample intelliJ app

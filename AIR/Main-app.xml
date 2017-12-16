@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<application xmlns="http://ns.adobe.com/air/application/26.0">
+<application xmlns="http://ns.adobe.com/air/application/27.0">
 
     <id>com.doitflash.exWebView</id>
     <filename>Main</filename>
     <name>Rich Webview</name>
-    <versionNumber>7.1.1</versionNumber>
+    <versionNumber>7.1.3</versionNumber>
     <extensions>
         <extensionID>com.myflashlab.air.extensions.webView</extensionID>
         <extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>

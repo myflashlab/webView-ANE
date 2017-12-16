@@ -1,4 +1,4 @@
-# Rich WebView ANE V7.1.1 (Android+iOS)
+# Rich WebView ANE V7.1.3 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 **Main Features:**
@@ -21,11 +21,7 @@ This extension is a perfect replacement to the classic StageWebView and it allow
 # asdoc
 [find the latest asdoc for this ANE here.](http://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/webView/package-detail.html)
 
-# Demo .apk
-you may like to see the ANE in action? [Download demo .apk](https://github.com/myflashlab/webView-ANE/tree/master/AIR/out)
-
-**NOTICE**: the demo ANE works only after you hit the "OK" button in the dialog which opens. in your tests make sure that you are NOT calling other ANE methods prior to hitting the "OK" button.
-[Download the ANE](https://github.com/myflashlab/webView-ANE/tree/master/AIR/lib)
+[Download demo ANE](https://github.com/myflashlab/webView-ANE/tree/master/AIR/lib)
 
 # Air Usage
 For the complete AS3 code usage, see the [demo project here](https://github.com/myflashlab/webView-ANE/blob/master/AIR/src/Main.as).
@@ -325,6 +321,9 @@ http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 [How to open/parse pdf using RichWebview ANE?](http://www.myflashlabs.com/how-to-open-parse-pdf-using-richwebview-ane/)  
 
 # Changelog
+*Dec 15, 2017 - V7.1.3*
+* optimized for [ANE-LAB sofwate](https://github.com/myflashlab/ANE-LAB).
+
 *Aug 20, 2017 - V7.1.1*
 * Fixed customtabs on Android devices with Android version 7.1.1 and higher. The equal version numbers are just a coincidence :D 
 * Added sample intelliJ app
