@@ -1,4 +1,4 @@
-# Rich WebView ANE V7.1.3 (Android+iOS)
+# Rich WebView ANE V7.1.4 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 **Main Features:**
@@ -27,9 +27,7 @@ This extension is a perfect replacement to the classic StageWebView and it allow
 For the complete AS3 code usage, see the [demo project here](https://github.com/myflashlab/webView-ANE/blob/master/AIR/src/Main.as).
 
 ```actionscript
-import com.myflashlab.air.extensions.webView.RichWebView;
-import com.myflashlab.air.extensions.webView.RichWebViewEvent;
-import com.myflashlab.air.extensions.webView.RichWebViewSettings;
+import com.myflashlab.air.extensions.webView.*;
 
 var _ex = new RichWebView(this.stage);
 
@@ -104,9 +102,7 @@ function onTouch(e:RichWebViewEvent):void
 # Air Usage - Embedded Browser
 
 ```actionscript
-import com.myflashlab.air.extensions.webView.RichWebView;
-import com.myflashlab.air.extensions.webView.RichWebViewEvent;
-import com.myflashlab.air.extensions.webView.RichWebViewSettings;
+import com.myflashlab.air.extensions.webView.*;
 
 var _ex = new RichWebView(this.stage);
 
@@ -192,39 +188,22 @@ function onEmbeddedBrowserAction(e:RichWebViewEvent):void
 <!--
 FOR ANDROID:
 -->
-<manifest android:installLocation="auto">
-		
-		<!--The new Permission thing on Android works ONLY if you are targetting Android SDK 23 or higher-->
-		<uses-sdk android:targetSdkVersion="23"/>
-		
-		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-		
-		<!--required for enabling gps for webview-->
-		<uses-permission android:name="android.permission.INTERNET" />
-		<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-		
-		<application android:hardwareAccelerated="true" android:allowBackup="true">
-			<activity android:hardwareAccelerated="true">
-				<intent-filter>
-					<action android:name="android.intent.action.MAIN" />
-					<category android:name="android.intent.category.LAUNCHER" />
-				</intent-filter>
-				<intent-filter>
-					<action android:name="android.intent.action.VIEW" />
-					<category android:name="android.intent.category.BROWSABLE" />
-					<category android:name="android.intent.category.DEFAULT" />
-				</intent-filter>
-			</activity>
-			
-			<!-- required for html file select buttons -->
-			<activity android:name="com.doitflash.webView.Pick" android:theme="@style/Theme.Transparent" />
-			
-			<!-- required for customtabs support on Android -->
-			<receiver android:name="com.doitflash.webView.ChromeTabActionBroadcastReceiver" />
-			
-		</application>
-		
-</manifest>
+
+<!-- under <manifest tag -->
+	<uses-sdk android:targetSdkVersion="26"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+	<!--required for enabling gps for webview-->
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
+	<!-- under <manifest><application tag -->
+		<!-- required for html file select buttons -->
+		<activity android:name="com.doitflash.webView.Pick" android:theme="@style/Theme.Transparent" />
+				
+		<!-- required for customtabs support on Android -->
+		<receiver android:name="com.doitflash.webView.ChromeTabActionBroadcastReceiver" />
 
 
 
@@ -232,34 +211,10 @@ FOR ANDROID:
 <!--
 FOR iOS:
 -->
-<InfoAdditions>
 
-	<key>MinimumOSVersion</key>
-	<string>8.0</string>
-	
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackOpaque</string>
-	
-	<key>UIRequiresPersistentWiFi</key>
-	<string>NO</string>
-	
-	<key>UIPrerenderedIcon</key>
-	<true />
-	
-	<!--required for webview GPS access-->
+<!--required for webview GPS access-->
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>I need location when in use</string>
-	
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>I need location always</string>
-	
-	<key>UIDeviceFamily</key>
-	<array>
-		<string>1</string>
-		<string>2</string>
-	</array>
-	
-</InfoAdditions>
 
 
 
@@ -267,16 +222,16 @@ FOR iOS:
 <!--
 Embedding the ANE:
 -->
-  <extensions>
-	<extensionID>com.myflashlab.air.extensions.webView</extensionID>
-	
-	<!-- Required if you are targeting AIR 24+ and have to take care of Permissions mannually -->
-	<extensionID>com.myflashlab.air.extensions.permissionCheck</extensionID>
-	
-	<!-- The following dependency ANEs are required https://github.com/myflashlab/common-dependencies-ANE -->
-	<extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
-	<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
-  </extensions>
+<extensions>
+        <extensionID>com.myflashlab.air.extensions.webView</extensionID>
+        <extensionID>com.myflashlab.air.extensions.permissionCheck</extensionID>
+
+        <extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.core</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.v4</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.customtabs</extensionID>
+        
+</extensions>
 ```
 
 # Setup Javascript:
@@ -291,28 +246,24 @@ AirBridge.evoke("toVibrate");
 ```
 
 # Requirements
-* This ANE is dependent on **androidSupport.ane** and **overrideAir.ane**. Download them from [here](https://github.com/myflashlab/common-dependencies-ANE).
-* Android SDK 10 or higher (lower Android SDKs like Android 2.3.6 will not support HTML5 completely, so you must consider this fact in your HTML/JS logic)
-* iOS 8.0 or higher
+* Android SDK 15+
+* iOS 8.0+
+* AIR 30+
 
 # Permissions
-If you are targeting AIR 24 or higher, you need to [take care of the permissions mannually](http://www.myflashlabs.com/adobe-air-app-permissions-android-ios/). Below are the list of Permissions this ANE might require. (Note: *Necessary Permissions* are those that the ANE will NOT work without them and *Optional Permissions* are those which are needed only if you are using some specific features in the ANE.)
+Below are the list of Permissions this ANE might require. Check out the demo project available at this repository to see how we have used the [PermissionCheck ANE](http://www.myflashlabs.com/product/native-access-permission-check-settings-menu-air-native-extension/) to ask for the permissions.
 
-Check out the demo project available at this repository to see how we have used our [PermissionCheck ANE](http://www.myflashlabs.com/product/native-access-permission-check-settings-menu-air-native-extension/) to ask for the permissions.
-
-**Necessary Permissions:**  
-none
-
-**Optional Permissions:**  
-1. PermissionCheck.SOURCE_LOCATION (Android)
-2. PermissionCheck.SOURCE_LOCATION_WHEN_IN_USE (iOS)
-3. PermissionCheck.SOURCE_LOCATION_ALWAYS (iOS)
-3. PermissionCheck.SOURCE_STORAGE (Android)
+Necessary | Optional
+--------------------------- | ---------------------------
+- | [SOURCE_LOCATION (Android)](https://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/nativePermissions/PermissionCheck.html#SOURCE_LOCATION)  
+- | [SOURCE_STORAGE (Android)](https://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/nativePermissions/PermissionCheck.html#SOURCE_STORAGE)  
+- | [SOURCE_LOCATION_WHEN_IN_USE (iOS)](https://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/nativePermissions/PermissionCheck.html#SOURCE_LOCATION_WHEN_IN_USE)  
+- | [SOURCE_LOCATION_ALWAYS (iOS)](https://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/nativePermissions/PermissionCheck.html#SOURCE_LOCATION_ALWAYS) 
 
 # Commercial Version
 http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 
-![WebView ANE](http://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-rich-webview-595x738.jpg)
+![WebView ANE](https://www.myflashlabs.com/wp-content/uploads/2015/11/product_adobe-air-ane-extension-rich-webview-595x738.jpg)
 
 # Tutorials
 [How to embed ANEs into **FlashBuilder**, **FlashCC** and **FlashDevelop**](https://www.youtube.com/watch?v=Oubsb_3F3ec&list=PL_mmSjScdnxnSDTMYb1iDX4LemhIJrt1O)  
@@ -321,6 +272,13 @@ http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 [How to open/parse pdf using RichWebview ANE?](http://www.myflashlabs.com/how-to-open-parse-pdf-using-richwebview-ane/)  
 
 # Changelog
+*Sep 25, 2018 - V7.1.4*
+* Removed androidSupport dependency. The ANE now depends on the following:
+	* ```<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>```
+	* ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.core</extensionID>```
+	* ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.v4</extensionID>```
+	* ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.customtabs</extensionID>```
+
 *Dec 15, 2017 - V7.1.3*
 * optimized for [ANE-LAB sofwate](https://github.com/myflashlab/ANE-LAB).
 

@@ -1,80 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<application xmlns="http://ns.adobe.com/air/application/27.0">
+<application xmlns="http://ns.adobe.com/air/application/30.0">
 
     <id>com.doitflash.exWebView</id>
     <filename>Main</filename>
     <name>Rich Webview</name>
-    <versionNumber>7.1.3</versionNumber>
-    <extensions>
-        <extensionID>com.myflashlab.air.extensions.webView</extensionID>
-        <extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
-        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
-        <extensionID>com.myflashlab.air.extensions.permissionCheck</extensionID>
-    </extensions>
+    <versionNumber>7.1.4</versionNumber>
 
-    <initialWindow>
-        <content>SWF file name is set automatically at compile time</content>
-        <visible>true</visible>
-        <autoOrients>true</autoOrients>
-        <fullScreen>true</fullScreen>
-    </initialWindow>
-
-    <icon>
-        <image48x48>icons/icon_48.png</image48x48>
-        <image57x57>icons/icon_57.png</image57x57>
-        <image72x72>icons/icon_72.png</image72x72>
-        <image76x76>icons/icon_76.png</image76x76>
-        <image96x96>icons/icon_96.png</image96x96>
-        <image114x114>icons/icon_114.png</image114x114>
-        <image120x120>icons/icon_120.png</image120x120>
-        <image144x144>icons/icon_144.png</image144x144>
-        <image152x152>icons/icon_152.png</image152x152>
-    </icon>
-
-    <!-- iOS specific capabilities -->
-    <iPhone>
-        <!-- A list of plist key/value pairs to be added to the application Info.plist -->
-        <InfoAdditions>
-            <![CDATA[
-
-                <key>MinimumOSVersion</key>
-                <string>8.0</string>
-
-                <key>UIStatusBarStyle</key>
-                <string>UIStatusBarStyleBlackOpaque</string>
-
-                <key>UIRequiresPersistentWiFi</key>
-                <string>NO</string>
-
-                <key>UIPrerenderedIcon</key>
-                <true />
-
-                <key>NSAppTransportSecurity</key>
-                <dict>
-                    <key>NSAllowsArbitraryLoads</key><true/>
-                </dict>
-
-                <!--required for webview GPS access-->
-                <key>NSLocationWhenInUseUsageDescription</key>
-                <string>I need location when in use</string>
-
-                <key>NSLocationAlwaysUsageDescription</key>
-                <string>I need location always</string>
-
-                <key>UIDeviceFamily</key>
-                <array>
-                    <string>1</string>
-                    <string>2</string>
-                </array>
-
-            ]]>
-        </InfoAdditions>
-
-        <requestedDisplayResolution>high</requestedDisplayResolution>
-    </iPhone>
-
-    <!-- Android specific tags that get passed to AndroidManifest.xml file. -->
-    <android>
+     <android>
         <manifestAdditions>
             <![CDATA[
             <manifest android:installLocation="auto">
@@ -82,9 +14,7 @@
                 <uses-permission android:name="android.permission.WAKE_LOCK" />
 		        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 		        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-		        <!--The new Permission thing on Android works ONLY if you are targetting Android SDK 23 or higher-->
-		        <uses-sdk android:targetSdkVersion="23"/>
+                <uses-sdk android:targetSdkVersion="26"/>
 
                 <application android:hardwareAccelerated="true" android:allowBackup="true">
                     <activity android:hardwareAccelerated="true">
@@ -110,5 +40,73 @@
             ]]>
             </manifestAdditions>
     </android>
+
+    <iPhone>
+
+        <InfoAdditions>
+            <![CDATA[
+
+                <key>MinimumOSVersion</key>
+                <string>8.0</string>
+
+                <key>UIStatusBarStyle</key>
+                <string>UIStatusBarStyleBlackOpaque</string>
+
+                <key>UIRequiresPersistentWiFi</key>
+                <string>NO</string>
+
+                <key>UIPrerenderedIcon</key>
+                <true />
+
+                <key>NSAppTransportSecurity</key>
+                <dict>
+                    <key>NSAllowsArbitraryLoads</key><true/>
+                </dict>
+
+                <!--required for webview GPS access-->
+                <key>NSLocationWhenInUseUsageDescription</key>
+                <string>I need location when in use</string>
+
+                <key>UIDeviceFamily</key>
+                <array>
+                    <string>1</string>
+                    <string>2</string>
+                </array>
+
+            ]]>
+        </InfoAdditions>
+
+        <requestedDisplayResolution>high</requestedDisplayResolution>
+    </iPhone>
+
+    <initialWindow>
+        <content>SWF file name is set automatically at compile time</content>
+        <visible>true</visible>
+        <autoOrients>true</autoOrients>
+        <fullScreen>true</fullScreen>
+    </initialWindow>
+
+    <icon>
+        <image48x48>icons/icon_48.png</image48x48>
+        <image57x57>icons/icon_57.png</image57x57>
+        <image72x72>icons/icon_72.png</image72x72>
+        <image76x76>icons/icon_76.png</image76x76>
+        <image96x96>icons/icon_96.png</image96x96>
+        <image114x114>icons/icon_114.png</image114x114>
+        <image120x120>icons/icon_120.png</image120x120>
+        <image144x144>icons/icon_144.png</image144x144>
+        <image152x152>icons/icon_152.png</image152x152>
+    </icon>
+
+    <extensions>
+        <extensionID>com.myflashlab.air.extensions.webView</extensionID>
+        <extensionID>com.myflashlab.air.extensions.permissionCheck</extensionID>
+
+        <extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.core</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.v4</extensionID>
+        <extensionID>com.myflashlab.air.extensions.dependency.androidSupport.customtabs</extensionID>
+        
+    </extensions>
 
 </application>

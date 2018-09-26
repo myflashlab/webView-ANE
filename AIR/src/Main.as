@@ -48,7 +48,6 @@ import com.doitflash.tools.DynamicFunc;
 public class Main extends Sprite
 {
 	private var _ex:RichWebView;
-	private var _exPermissions:PermissionCheck = new PermissionCheck();
 
 	private const BTN_WIDTH:Number = 150;
 	private const BTN_HEIGHT:Number = 60;
@@ -162,20 +161,23 @@ public class Main extends Sprite
 	private function checkPermissions():void
 	{
 		// first you need to make sure you have access to the Location if you are on Android?
-		var permissionState:int = _exPermissions.check(PermissionCheck.SOURCE_LOCATION);
+		PermissionCheck.init();
+
+		var permissionState:int = PermissionCheck.check(PermissionCheck.SOURCE_LOCATION);
 
 		if (permissionState == PermissionCheck.PERMISSION_UNKNOWN || permissionState == PermissionCheck.PERMISSION_DENIED)
 		{
-			_exPermissions.request(PermissionCheck.SOURCE_LOCATION, onRequestResult);
+			PermissionCheck.request(PermissionCheck.SOURCE_LOCATION, onRequestResult);
 		}
 		else
 		{
 			init();
 		}
 
-		function onRequestResult($state:int):void
+		function onRequestResult($obj:Object):void
 		{
-			if ($state != PermissionCheck.PERMISSION_GRANTED)
+			C.log("permission for " + $obj.source + ": " + prettify($obj.state));
+			if ($obj.state != PermissionCheck.PERMISSION_GRANTED)
 			{
 				C.log("You did not allow the app the required permissions!");
 			}
@@ -207,7 +209,6 @@ public class Main extends Sprite
 
 		// make sure stage is not null when you're initializing RichWebView
 		_ex = new RichWebView(this.stage);
-		if(_ex.os == RichWebView.ANDROID) C.log("Android SDK version: ", _ex.sdkVersion);
 		_ex.addEventListener(RichWebViewEvent.BACK_CLICKED, onBackClicked);
 		_ex.addEventListener(RichWebViewEvent.PAGE_STARTING, onPageStarting);
 		_ex.addEventListener(RichWebViewEvent.PAGE_STARTED, onPageStarted);
@@ -228,6 +229,7 @@ public class Main extends Sprite
 		RichWebViewSettings.BG_COLOR_HEX = "#FFFFFFFF"; // AARRGGBB
 		//RichWebViewSettings.USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.36 (KHTML, like Gecko) Chrome/13.0.766.0 Safari/534.36"; // useful when you are trying to load embedded YouTube or Vimeo videos
 		RichWebViewSettings.ENABLE_AIR_PREFIX = true; // This property works on Android ONLY and is set to true by default.
+		RichWebViewSettings.MEDIA_PLAYBACK_REQUIRES_USER_GESTURE = true;
 
 		// initialize the embedded Browser feature
 		if (!_ex.isEmbeddedBrowserInitialized)
@@ -380,18 +382,13 @@ public class Main extends Sprite
 			 monitor.start();*/
 		}
 
-		/*function onConnection(e:Event = null):void
-		 {
-		 C.log("onConnection")
-		 }*/
-
 
 		onResize();
 	}
 
 	private function onBackClicked(e:RichWebViewEvent):void
 	{
-		C.log("onBackClicked")
+		C.log("onBackClicked");
 		if (_ex.canGoBack) _ex.goBack();
 		else _ex.closeWebView();
 	}

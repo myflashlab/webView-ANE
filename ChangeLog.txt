@@ -1,5 +1,12 @@
 Rich WebView Adobe Air Native Extension
 
+*Sep 25, 2018 - V7.1.4*
+* Removed androidSupport dependency. The ANE now depends on the following:
+	* ```<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>```
+	* ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.core</extensionID>```
+	* ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.v4</extensionID>```
+	* ```<extensionID>com.myflashlab.air.extensions.dependency.androidSupport.customtabs</extensionID>```
+
 *Dec 15, 2017 - V7.1.3*
 * optimized for [ANE-LAB sofwate](https://github.com/myflashlab/ANE-LAB).
 
