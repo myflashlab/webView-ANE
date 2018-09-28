@@ -255,10 +255,10 @@ Below are the list of Permissions this ANE might require. Check out the demo pro
 
 Necessary | Optional
 --------------------------- | ---------------------------
-- | [SOURCE_LOCATION (Android)](https://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/nativePermissions/PermissionCheck.html#SOURCE_LOCATION)  
-- | [SOURCE_STORAGE (Android)](https://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/nativePermissions/PermissionCheck.html#SOURCE_STORAGE)  
-- | [SOURCE_LOCATION_WHEN_IN_USE (iOS)](https://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/nativePermissions/PermissionCheck.html#SOURCE_LOCATION_WHEN_IN_USE)  
-- | [SOURCE_LOCATION_ALWAYS (iOS)](https://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/nativePermissions/PermissionCheck.html#SOURCE_LOCATION_ALWAYS) 
+. | [SOURCE_LOCATION (Android)](https://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/nativePermissions/PermissionCheck.html#SOURCE_LOCATION)  
+. | [SOURCE_STORAGE (Android)](https://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/nativePermissions/PermissionCheck.html#SOURCE_STORAGE)  
+. | [SOURCE_LOCATION_WHEN_IN_USE (iOS)](https://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/nativePermissions/PermissionCheck.html#SOURCE_LOCATION_WHEN_IN_USE)  
+. | [SOURCE_LOCATION_ALWAYS (iOS)](https://myflashlab.github.io/asdoc/com/myflashlab/air/extensions/nativePermissions/PermissionCheck.html#SOURCE_LOCATION_ALWAYS) 
 
 # Commercial Version
 http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
