@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="author" content="Ali Tavakoli">
-<title>Rich WebView ANE</title>
+<meta name="author" content="Hadi Tavakoli">
+<title>RichWebView ANE</title>
 
 
 
@@ -194,14 +194,14 @@ function onPageLoaded() {
 <body>
 	<div class="container">
 		<div class="jumbotron">
-			<h2>Rich WebView ANE V7.1.4 (iOS+Android)</h2>
-			<button class="btn btn-primary btn-lg" type="button" onClick="AirBridge.evoke('closeWebView()')">closeWebView</button>
+			<h2>RichWebView AIR Native Extension</h2>
+			<button class="btn btn-primary btn-lg" type="button" onClick="AirBridge.evoke('closeWebView()')">Close Window</button>
 			<hr>
 			<p>
-				The WebView extension lets you create a web view port inside your AdobeAir mobile application and load content from a URL or an offline html file on Android and iOS.
+				RichWebView extension lets you create a webview port inside your AdobeAIR mobile application and load content from a URL or an offline html file on Android and iOS.
 			</p>
 			<p>
-				This is basically what the Adobe's default StageWebView does but the power factor of this extension is that it enables your JavaScript code communicate with your flash logic!
+				This is basically what the Adobe's default StageWebView does but the power factor of this extension is that it gracefully enables your JavaScript code communicate with your AIR app! and more over, this ANE uses the latest Native SDKs to present your web content to users on mobile.
 			</p>
 			<p>
 				We are using the latest features that Android and iOS SDK provide to let you get the best out of the webView on both platforms.
@@ -212,20 +212,20 @@ function onPageLoaded() {
 		<p>
 			<h3>Main Features</h3>
 			<ul>
-				<li>Call JS funcs from flash</li>
-				<li>And send messages to flash from JS</li>
+				<li>Call JS functions from AIR</li>
+				<li>Send messages to AIR from JS</li>
 				<li>Navigate back and forth through pages</li>
 				<li>Control the Scroll position</li>
 				<li>Change the view port size and position at runtime</li>
 				<li>Play video files inside the webview including embedded iFrame videos</li>
 				<li>Take full screenshots from your webview object</li>
-				<li>get GPS location information in to your JS</li>
-				<li>enable file picker dialog on your HTML input fields</li>
+				<li>Get GPS location information in to your JS</li>
+				<li>Enable file picker dialog on your HTML input fields</li>
 				<li>Choose on the background color of your webview or make it transparent</li>
 				<li>TouchEvent to know when the WebView is touched</li>
-				<li>Optionally prevent URL loads and let Air handle them</li>
+				<li>Optionally prevent URL loads and let AIR handle them</li>
 				<li>Load HTML Strings directly into the WebView instance</li>
-				<li>And of course you can do whatever HTML allowes you to do!</li>
+				<li>And of course you can do whatever HTML allows you to do!</li>
 			</ul>
 
 			let's see these features in more details!
@@ -234,26 +234,26 @@ function onPageLoaded() {
 
 
 		<p>
-			<h3>Communicate between Flash and JS</h3>
-			Well, possibilities are endless when you can send messages to flash and vice versa. you may do simple tasks like playing a sound or showing a toast but you can also do complicated stuff like opening the camera, taking a picture and retrive the photo in your JS logic! I don't know, just use your imagination! As a very simple test, I'm going to tell my flash app to play a sound by calling the following func from my html: <code>toPlaySound()</code>
+			<h3>Communication between AIR and JS</h3>
+			Possibilities are endless when you can send messages to AIR and vice versa. you may do simple tasks like playing a sound or showing a toast but you can also do complicated stuff like opening the camera, taking a picture and retrieve the photo in your JS logic! I don't know, just use your imagination! As a very simple test, I'm going to tell my flash app to play a sound by calling the following func from my html: <code>toPlaySound()</code>
 			<a href="javascript:void(0);" onclick="AirBridge.evoke('toPlaySound()')" return false;>CLICK ME!</a> <b>make sure your device is not silenced to hear the sound</b>
 			<br><br>
-			As another test, I'm going to send a message to flash and in return, flash will call JS to open an Alert window! <a href="javascript:void(0);" onclick="AirBridge.evoke('toOpenJSAlert()')" return false;> CLICK HERE.</a>
+			As another test, I'm going to send a message to AIR and in return, the AIR app will call JS to open an Alert window! <a href="javascript:void(0);" onclick="AirBridge.evoke('toOpenJSAlert()')" return false;> CLICK HERE.</a>
 		</p>
 		<hr>
 
 
 		<p>
-			<h3>Sending complex data from JS to Flash</h3>
-			There are times that you may wish to send a lot of information from JS to the Air side. The best approach is to create a JSON string in JS, <i>encodeURIComponent</i> it and then send to the other side. (In this example, check your debugger trace log to see the JS Json string is delivered to the Air side as soon as you hit the dollowing button.
-			<button type="button" onClick="sendComplexDataToAir()">Send Complex Data To Air</button>
+			<h3>Sending complex data from JS to AIR</h3>
+			There are times when you wish to send a lot of information from JS to your AIR app. The best approach is to create a JSON string in JS, <i>encodeURIComponent</i> it and then send to the other side. (In this example, check your debugger trace log to see the JS Json string is delivered to the AIR side as soon as you hit the following button.
+			<button type="button" onClick="sendComplexDataToAir()">Send Complex Data To AIR</button>
 		</p>
 		<hr>
 
 
 		<p>
-			<h3>Prevent URL loads in html content and let Air handle it</h3>
-			Rich Webview allows you monitor the URL links which are about to open. In your Air application, you can listen to <b>RichWebViewEvent.PAGE_STARTING</b> listener so you will be informed when a new URL is about to open or not. For example, you wish to handle URLs like <b>mailto:email@domain.com</b> or <b>tel:5555555</b> inside your AS3 code. You can easily do that. Try hitting the below buttons, and you will see that AS3 will handle the click instead of the webview. And ofcourse you can handle any type of URL with this approach.
+			<h3>Prevent URL loads in html content and let AIR handle it</h3>
+			RichWebview allows you monitor the URLs which are about to open. In your AIR app, you can listen to <b>WebViewEvents.PAGE_STARTING</b> and you will be informed when a new URL is about to open. For example, you wish to handle URLs like <b>mailto:email@domain.com</b> or <b>tel:5555555</b> inside your AS3 code. You can easily do that. Try hitting the below buttons, and you will see that AS3 will handle the click instead of the native webview. And of course you can handle any type of URL with this approach.
 			<button type="button" onClick="location.href='mailto:email@domain.com';">mailto:email@domain.com</button>
 			<button type="button" onclick="location.href='tel:5555555';">tel:5555555</button>
 		</p>
@@ -262,27 +262,9 @@ function onPageLoaded() {
 
 		<p>
 			<h3>Resizing the view port in runtime</h3>
-			Being able to resize and position your webView is very important because with that you will be able to put the web view anywhere inside your app design in case you don't want to open it in fullscreen like this sample! you can easily change the position and dimension of your view from flash... try the following buttons to test the resizing option...
-			<button type="button" onClick="AirBridge.evoke('changePosition(50,100,100,200)')">changePosition</button>
-			<button type="button" onClick="AirBridge.evoke('changePosition(0,0,0,0)')">fullscreen</button>
-		</p>
-		<hr>
-
-
-		<p>
-			<h3>Control the scroll position</h3>
-			html and JS is able to control the scrolling of a web page but you will have more options if you use the ANE methods like:
-			<ul>
-				<li><code><a href="javascript:void(0);" onclick="AirBridge.evoke('pageDown(false)')" return false;>_ex.pageDown(false);</a></code></li>
-				<li><code><a href="javascript:void(0);" onclick="AirBridge.evoke('pageDown(false)')" return false;>_ex.pageDown(true);</a></code></li>
-				<li><code><a href="javascript:void(0);" onclick="AirBridge.evoke('pageUp(false)')" return false;>_ex.pageUp(false);</a></code></li>
-				<li><code><a href="javascript:void(0);" onclick="AirBridge.evoke('pageUp(true)')" return false;>_ex.pageUp(true);</a></code></li>
-				<li><code><a href="javascript:void(0);" onclick="AirBridge.evoke('zoomIn()')" return false;>_ex.zoomIn();</a></code></li>
-				<li><code><a href="javascript:void(0);" onclick="AirBridge.evoke('zoomOut()')" return false;>_ex.zoomOut();</a></code></li>
-				<li><code>_ex.filingScroll(0, 200);</code></li>
-				<li><code>_ex.scrollBy(0, -200);</code></li>
-				<li><code>_ex.scrollTo(_ex.scrollX, (_ex.scrollY + 200));</code></li>
-			</ul>
+			Being able to resize and position your webView is very important because with that you will be able to put the web view anywhere inside your app design. You can easily change the position and dimension of your view from AIR... try the following buttons to test the resizing option...
+			<button type="button" onClick="AirBridge.evoke('changePosition(50,100,100,200)')">change View Port</button>
+			<button type="button" onClick="AirBridge.evoke('changePosition(0,0,0,0)')">Go Fullscreen</button>
 		</p>
 		<hr>
 
@@ -291,14 +273,14 @@ function onPageLoaded() {
 			<h3>Take Bitmap screenshots</h3>
 			if you need screenshots to be taken from your webview page, all you have to do is to call <code>_ex.requestBitmap();</code>
 			<br>
-			<button type="button" onClick="AirBridge.evoke('toTakeScreenshot()')">test the screenshot!</button>
+			<button type="button" onClick="AirBridge.evoke('toTakeScreenshot()')">Test The Screenshot!</button>
 		</p>
 		<hr>
 
 
 		<p>
 			<h3>get GPS information from browser</h3>
-			You can use JS libraries to get GPS information. as a test, touch this button and wait a few seconds for an alert window reporting your location.
+			You can use JS to get GPS information. As a test, touch this button and wait a few seconds for an alert window reporting your location.
 			<br>
 			<button type="button" onClick="getUserLocation()">test GPS!</button>
 		</p>

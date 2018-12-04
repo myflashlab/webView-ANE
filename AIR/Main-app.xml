@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<application xmlns="http://ns.adobe.com/air/application/30.0">
+<application xmlns="http://ns.adobe.com/air/application/31.0">
 
     <id>com.doitflash.exWebView</id>
     <filename>Main</filename>
     <name>Rich Webview</name>
-    <versionNumber>7.1.4</versionNumber>
+    <versionNumber>7.1.5</versionNumber>
 
      <android>
         <manifestAdditions>
