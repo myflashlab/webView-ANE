@@ -1,4 +1,4 @@
-# Rich WebView ANE V7.1.4 (Android+iOS)
+# Rich WebView ANE V7.1.5 (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
 **Main Features:**
@@ -272,6 +272,10 @@ http://www.myflashlabs.com/product/rich-webview-ane-adobe-air-native-extension/
 [How to open/parse pdf using RichWebview ANE?](http://www.myflashlabs.com/how-to-open-parse-pdf-using-richwebview-ane/)  
 
 # Changelog
+*Dec 4, 2018 - V7.1.5*
+* Works with OverrideAir ANE V5.6.1 or higher
+* Works with ANELAB V1.1.26 or higher
+
 *Sep 25, 2018 - V7.1.4*
 * Removed androidSupport dependency. The ANE now depends on the following:
 	* ```<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>```
