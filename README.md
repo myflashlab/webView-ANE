@@ -1,3 +1,7 @@
+**NOTICE: This ANE is deprecated. We have developed a new [RichWebView II ANE](https://github.com/myflashlab/RichWebView-ANE) from scratch which uses native APIs in a more robust way. Consider using the new ANE instead of this one.**
+
+ **We will keep on maintaining this ANE till mid-2019 but you are recommended to switch to the new ANE as soon as you can.**
+
 # Rich WebView ANE (Android+iOS)
 This extension is a perfect replacement to the classic StageWebView and it allows you to easily call Javascript functions from flash and send String messages from JS to flash. it also gives you many new features that the classic StageWebView couldn't provide. Features like File pick or GPS access.
 
